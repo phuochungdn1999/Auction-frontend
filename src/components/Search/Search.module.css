@@ -1,0 +1,32 @@
+.searchBox {
+  background-color: #2f3640;
+  background: #2f3640;
+  height: 50px;
+  border-radius: 40px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.searchBtn {
+  color: #fff;
+  float: right;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #2f3640;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searchTxt {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 30px;
+  width: 500px;
+  font-family: 'Poppins', sans-serif;
+}

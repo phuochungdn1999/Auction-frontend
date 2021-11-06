@@ -1,0 +1,127 @@
+.info {
+  width: 100%;
+}
+.ProductName {
+  font-size: 21px;
+  font-weight: 500;
+  color: rgb(13, 17, 54);
+  line-height: 1.2;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.ProductBand {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(13, 17, 54);
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  line-height: 22px;
+}
+.ProductBand span {
+  color: rgb(32, 129, 226);
+  margin-left: 5px;
+}
+.ProductPriceWapper {
+  /* display: flex;
+  -webkit-box-align: center;
+  align-items: center; */
+  text-decoration: line-through;
+  color: #929292;
+  font-weight: 600;
+}
+.ProductCartWapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  border: 1px solid rgb(229, 232, 235);
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgb(251, 253, 255);
+}
+.ProductDescription {
+  font-family: 'Poppins', sans-serif;
+}
+.ProductPriceSale {
+  line-height: 27px;
+  font-size: 23px;
+  font-weight: 600;
+  color: rgb(53, 56, 64);
+  display: flex;
+  margin-top: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+.ProductPriceSale img {
+  width: 24px;
+  height: 24px;
+}
+.title {
+  color: rgb(112, 122, 131);
+  font-size: 17px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.button {
+  position: relative;
+  display: block;
+  color: black;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  padding: 14px 50px;
+  text-transform: uppercase;
+  transition: 1s all ease;
+  border-radius: 10px;
+  background: none;
+  outline: none;
+  background-color: rgb(32, 129, 226);
+  border: 1px solid rgb(32, 129, 226);
+  color: #fff;
+  margin-left: 20px;
+  font-weight: 500;
+}
+.button:hover {
+  cursor: pointer;
+  transition: all 0.2s ease 0s;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(24, 104, 183);
+}
+.searchBox {
+  height: 50px;
+  border: 1px solid rgb(32, 129, 226);
+  border-radius: 10px;
+  padding: 10px 13px;
+  cursor: pointer;
+  width: 35%;
+  color: rgb(32, 129, 226);
+}
+
+.searchTxt {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: #333;
+  font-size: 14px;
+  transition: 0.4s;
+  line-height: 30px;
+  font-family: 'Poppins', sans-serif;
+  color: rgb(32, 129, 226);
+}
+.containBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(251, 253, 255);
+}
+.infoWrapper {
+  border: 1px solid rgb(229, 232, 235);
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgb(251, 253, 255);
+}

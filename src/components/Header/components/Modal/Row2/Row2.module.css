@@ -1,0 +1,51 @@
+.titles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: 'Poppins', sans-serif;
+
+  font-size: 12px;
+  padding: 8px 0px;
+}
+.offer {
+  margin-top: 30px;
+  font-family: 'Poppins', sans-serif;
+  /* border: 1px solid rgb(229, 232, 235); */
+  width: 100%;
+  border-radius: 10px;
+}
+.ListItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0px;
+  border-top: 1px solid rgb(229, 232, 235);
+}
+.listItems {
+  display: flex;
+  flex-direction: column;
+}
+.itemPrice {
+  font-size: 14px;
+}
+.time {
+  font-size: 14px;
+}
+.itemPrice img {
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
+}
+.count {
+  margin-right: -34px;
+}
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 1px solid rgb(229, 232, 235);
+}
+.name i {
+  margin-right: 10px;
+}

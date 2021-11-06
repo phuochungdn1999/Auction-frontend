@@ -1,0 +1,59 @@
+.titles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: 'Poppins', sans-serif;
+  /* border-bottom: 1px solid rgb(229, 232, 235); */
+  border-top: 1px solid rgb(229, 232, 235);
+  font-size: 12px;
+  padding: 8px 0px;
+}
+.offer {
+  margin-top: 30px;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid rgb(229, 232, 235);
+  width: 100%;
+  border-radius: 10px;
+  background-color: rgb(251, 253, 255);
+}
+.ListItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0px;
+  border-top: 1px solid rgb(229, 232, 235);
+}
+.listItems {
+  display: flex;
+  flex-direction: column;
+  height: 184px;
+  overflow-x: scroll;
+}
+
+.price {
+  margin-left: 20px;
+}
+.time {
+  margin-right: 20px;
+}
+.itemPrice {
+  margin-left: 20px;
+}
+.itemPrice img {
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
+}
+.count {
+  margin-right: -48px;
+}
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 1px solid rgb(229, 232, 235);
+}
+.name i {
+  margin-right: 10px;
+}

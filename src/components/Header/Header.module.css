@@ -1,0 +1,248 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.container {
+  /* width: 1200px; */
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  padding: 35px 40px 40px 40px;
+  align-items: center;
+  height: 40px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+}
+.info {
+  display: flex;
+  /* justify-content: space-between; */
+  line-height: 52px;
+  cursor: pointer;
+  font-weight: 600;
+  /* margin-right: 125px; */
+}
+.info div {
+  margin-right: 15px;
+}
+.info i {
+  cursor: pointer;
+  line-height: 18px;
+}
+.acc {
+  cursor: pointer;
+}
+.searchBox {
+  background-color: #2f3640;
+  background: #2f3640;
+  height: 50px;
+  border-radius: 40px;
+  padding: 10px;
+  cursor: pointer;
+}
+.searchBtn {
+  color: #fff;
+  float: right;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #2f3640;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searchTxt {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 30px;
+  width: 0px;
+}
+.searchBox:hover > .searchTxt {
+  width: 240px;
+  padding: 0 6px;
+}
+.notifyList {
+  position: absolute;
+  width: 200px;
+  background: #fff;
+  list-style: none;
+  display: none;
+  right: -27px;
+  transform-origin: top;
+  transition: 0.3s;
+}
+.notifyItem {
+  font-size: 10px;
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+.notifyItem:hover {
+  color: rgb(145, 104, 65);
+}
+.acc {
+  position: relative;
+  transition: 0.3s;
+}
+.acc:hover .notifyList {
+  display: block;
+}
+.notifyList::before {
+  content: '';
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent rgb(239, 239, 239) transparent;
+  position: absolute;
+  right: 30px;
+  top: -20px;
+}
+.img img {
+  width: 22px;
+  height: 30px;
+  /* line-height: 52px; */
+}
+.img {
+  height: 52px;
+  line-height: 70px;
+}
+.titles {
+  display: flex;
+  flex-direction: row;
+  line-height: 36px;
+  justify-content: space-between;
+  font-size: 17px;
+  font-weight: 700;
+}
+.titles:hover {
+  cursor: pointer;
+}
+.titles img {
+  width: 40px;
+  margin-right: 10px;
+}
+.btnModal {
+  padding: 10px 20px;
+  display: block;
+  margin: 100px auto 0;
+  font-size: 18px;
+}
+
+.modal,
+.overLay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 111111;
+}
+
+.overLay {
+  background: rgba(49, 49, 49, 0.8);
+}
+.modalContent {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 45px;
+  border-radius: 3px;
+  width: 550px;
+  min-width: 300px;
+  font-family: 'Poppins', sans-serif;
+  z-index: 10000000;
+}
+.profile {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile img {
+  border-radius: 50%;
+}
+.profile p {
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.token {
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 10px;
+}
+.closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+  border: none;
+  background-color: rgb(241, 241, 241);
+  cursor: pointer;
+}
+.closeModal i {
+  font-size: 24px;
+}
+
+.offer {
+  margin-top: 30px;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid rgb(229, 232, 235);
+  width: 100%;
+  border-radius: 10px;
+}
+.ListItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0px;
+  border-top: 1px solid rgb(229, 232, 235);
+}
+.listItems {
+  display: flex;
+  flex-direction: column;
+}
+
+.price {
+  margin-left: 20px;
+}
+.time {
+  margin-right: 20px;
+}
+.itemPrice {
+  margin-left: 20px;
+}
+.itemPrice img {
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
+}
+.count {
+  margin-right: -34px;
+}
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 1px solid rgb(229, 232, 235);
+}
+.name i {
+  margin-right: 10px;
+}

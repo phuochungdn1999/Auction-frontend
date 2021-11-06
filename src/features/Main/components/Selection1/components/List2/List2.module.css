@@ -1,0 +1,53 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  line-height: 50px;
+  padding: 13px;
+  /* margin-bottom: 10px; */
+  border-bottom: 1px solid rgb(229, 232, 235);
+}
+.item:hover {
+  border-radius: 10px;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+  transform: scale(1.03);
+  transition: all 0.2s ease 0s;
+}
+.List {
+  width: 40%;
+}
+.ava {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0px 10px;
+}
+.name {
+  font-weight: 600;
+  font-size: 14px;
+  color: rgb(4, 17, 29);
+}
+.num {
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+.collection {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  line-height: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(138, 147, 155);
+}
+.collection img {
+  width: 14px;
+  height: 14px;
+  margin-top: 16px;
+  margin-right: 2px;
+}
+.info {
+  width: 70%;
+  display: flex;
+}

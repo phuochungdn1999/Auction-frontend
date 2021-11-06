@@ -1,0 +1,10 @@
+.hi {
+  display: flex !important;
+  flex-direction: row !important;
+  /* justify-content: space-between; */
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.hi label {
+  margin-right: 30px;
+}

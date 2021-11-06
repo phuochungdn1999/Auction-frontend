@@ -1,0 +1,17 @@
+textarea {
+  margin: 10px 12px 10px;
+  border: none;
+  outline: none;
+  resize: none;
+  background-color: #f7f7f7;
+  font-family: 'Poppins', sans-serif;
+}
+.textAreaStyle {
+  width: auto;
+  height: auto;
+  border-bottom: 1px solid rgb(118, 118, 118);
+  border-radius: 2px;
+  font-size: 16px;
+  background-color: #f7f7f7;
+  margin-bottom: 30px;
+}

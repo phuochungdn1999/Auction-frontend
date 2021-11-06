@@ -1,0 +1,12 @@
+.wrappers {
+  margin-bottom: 30px;
+}
+.uploadImg {
+  padding: 75px 150px;
+  background-color: #fff;
+  border: 3px dashed rgb(229, 232, 235);
+  border-radius: 10px;
+}
+img {
+  width: 70px;
+}
