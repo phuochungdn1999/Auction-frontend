@@ -21,7 +21,12 @@ const Slider = () => {
               >
                 Explore
               </button>
-              <button className={styles.btn2}>Create</button>
+              <button
+                className={styles.btn2}
+                onClick={() => history.push('/create')}
+              >
+                Create
+              </button>
             </div>
           </div>
           <div className={styles.infoRight}>

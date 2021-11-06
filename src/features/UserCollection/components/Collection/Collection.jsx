@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../ProductList.module.css';
+import styles from '../../UserCollection.module.css';
 import { Link } from 'react-router-dom';
 import formatCash from '../../../../constants/formatPrice';
 const EachProduct = (props) => {

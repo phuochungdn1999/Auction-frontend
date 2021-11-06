@@ -1,0 +1,143 @@
+.Banner {
+  width: 100%;
+  height: 330px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 70px;
+}
+.imgWrapper {
+  width: 100%;
+  height: 600px;
+}
+.imgWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.divWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.userInfo img {
+  width: 126px;
+  height: 126px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10;
+  top: 335px;
+  left: 46%;
+  border: 2px solid #fff;
+}
+.userName {
+  font-weight: 600;
+  font-size: 41px;
+  letter-spacing: 0px;
+  color: rgb(4, 17, 29);
+  font-family: 'Poppins', sans-serif;
+}
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hi {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+.hi span {
+  color: rgb(32, 129, 226);
+}
+.Description {
+  color: rgb(112, 122, 131);
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+  overflow: hidden;
+  transition: max-height 100ms ease 0s;
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+}
+.FollowWrapper {
+  display: flex;
+  margin-top: 20px;
+  /* border: 1px solid rgb(229, 232, 235);
+  padding: 10px 0px 20px; */
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+.items {
+  width: 144px;
+  height: 88px;
+  padding: 10px 0 20px;
+  text-align: center;
+  border-left: 1px solid rgb(229, 232, 235);
+  border-top: 1px solid rgb(229, 232, 235);
+  border-bottom: 1px solid rgb(229, 232, 235);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  cursor: pointer;
+}
+.items:hover {
+  transition: all 0.2s ease 0s;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+}
+.owners {
+  width: 144px;
+  height: 88px;
+  padding: 10px 0;
+  text-align: center;
+  border-left: 1px solid rgb(229, 232, 235);
+  border-top: 1px solid rgb(229, 232, 235);
+  border-bottom: 1px solid rgb(229, 232, 235);
+  cursor: pointer;
+}
+.owners:hover {
+  transition: all 0.2s ease 0s;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+}
+.floorPrice {
+  width: 144px;
+  height: 88px;
+  padding: 10px;
+  text-align: center;
+  border-left: 1px solid rgb(229, 232, 235);
+  border-top: 1px solid rgb(229, 232, 235);
+  border-bottom: 1px solid rgb(229, 232, 235);
+  cursor: pointer;
+}
+.floorPrice:hover {
+  transition: all 0.2s ease 0s;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+}
+.volumneTraded {
+  width: 144px;
+  height: 88px;
+  padding: 10px 0;
+  text-align: center;
+  border-left: 1px solid rgb(229, 232, 235);
+  border-top: 1px solid rgb(229, 232, 235);
+  border-bottom: 1px solid rgb(229, 232, 235);
+  border-right: 1px solid rgb(229, 232, 235);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
+}
+.volumneTraded:hover {
+  transition: all 0.2s ease 0s;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+}
+.name {
+  font-size: 14px;
+  color: rgb(138, 147, 155);
+}
+
+.num {
+  font-weight: 600;
+  font-size: 24px;
+  color: rgb(4, 17, 29);
+  margin-top: 10px;
+}

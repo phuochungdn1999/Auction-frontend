@@ -261,3 +261,13 @@
   align-items: center;
   background-color: #fff;
 }
+.bocprice {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.item-img {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+}

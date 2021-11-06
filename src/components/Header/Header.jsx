@@ -43,8 +43,12 @@ const Header = () => {
               alt="img"
             />
           </div>
-          <div onClick={toggleAcc}> Connect to Wallet</div>
-          {acc && <div onClick={toggleModal}> Xin chào</div>}
+
+          {acc ? (
+            <div onClick={toggleModal}> Xin chào</div>
+          ) : (
+            <div onClick={toggleAcc}> Connect to Wallet</div>
+          )}
         </div>
       </div>
       {modal && (

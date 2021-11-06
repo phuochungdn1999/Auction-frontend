@@ -43,7 +43,14 @@ const History = () => {
                         </h3>
                       </div>
                     </div>
-                    <div className="cart-product-price">123123123123 đ</div>
+                    <div className="bocprice">
+                      <div className="cart-product-price">123123123123 </div>
+                      <img
+                        src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
+                        alt="anh"
+                        className="item-img"
+                      />
+                    </div>
                     <div className="cart-product-quantity">
                       <div className="count">Sell</div>
                     </div>
