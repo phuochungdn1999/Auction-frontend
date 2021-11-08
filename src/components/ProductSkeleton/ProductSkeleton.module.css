@@ -1,0 +1,12 @@
+.SkeletonContainer {
+  /* width: 100%; */
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+/* .DetailsSekeleton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+} */

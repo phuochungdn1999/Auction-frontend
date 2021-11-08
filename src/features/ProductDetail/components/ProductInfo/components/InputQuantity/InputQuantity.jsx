@@ -7,7 +7,7 @@ const InputQuantity = () => {
         className={styles.searchTxt}
         type="text"
         name="productName_contains"
-        placeholder="Type to Make a Offer"
+        placeholder=" Offer"
         autoComplete="off"
       />
     </div>

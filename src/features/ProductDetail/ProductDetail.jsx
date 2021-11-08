@@ -9,16 +9,22 @@ import { useParams } from 'react-router';
 import Footer from '../../components/Footer/Footer';
 import ClipLoader from 'react-spinners/ClipLoader';
 import Description from './components/Description/Description';
+import DetailsSekeleton from '../../components/ProductSkeleton/DetailsSekeleton';
+import InfoSekeleton from '../../components/ProductSkeleton/InfoSekeleton';
 function ProductDetail(props) {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-
+  const [skeletonLoading, setSkeletonLoading] = useState(false);
   useEffect(() => {
+    setSkeletonLoading(true);
     if (id) {
       const getApi = `https://yshuynh.pythonanywhere.com/api/products/${id}`;
       axios.get(getApi).then((response) => {
-        setProduct(response.data);
+        setTimeout(() => {
+          setProduct(response.data);
+          setSkeletonLoading(false);
+        }, 5000);
       });
     }
   }, [id]);
@@ -39,40 +45,53 @@ function ProductDetail(props) {
       ) : (
         <React.Fragment>
           <Header />
+
           <div className={styles.container_productDetails}>
             <div className={styles.grid__row}>
               <div className={styles.row}>
-                <div className={styles.grid__column5}>
-                  <img
-                    src={product?.thumbnail}
-                    alt="anhr"
-                    className={styles.product_img}
-                  />
-                  <div className={styles.listImg}>
-                    {product.images?.slice(0, 5)?.map((item) => (
-                      <img
-                        key={item.id}
-                        className={styles.imgDetails}
-                        src={item.url}
-                        alt="img"
-                      />
-                    ))}
+                {skeletonLoading ? (
+                  <InfoSekeleton />
+                ) : (
+                  <div className={styles.grid__column5}>
+                    <img
+                      src={product?.thumbnail}
+                      alt="anhr"
+                      className={styles.product_img}
+                    />
+                    <div className={styles.listImg}>
+                      {product.images?.slice(0, 5)?.map((item) => (
+                        <img
+                          key={item.id}
+                          className={styles.imgDetails}
+                          src={item.url}
+                          alt="img"
+                        />
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <div className={styles.grid__column52}>
-                  <ProductInfor product={product} />
-                  <List />
-                </div>
+                )}
+                {skeletonLoading ? (
+                  <DetailsSekeleton />
+                ) : (
+                  <div className={styles.grid__column52}>
+                    <ProductInfor product={product} />
+                    <List />
+                  </div>
+                )}
               </div>
-              <div className={styles.row}>
-                <Description product={product} />
-              </div>
-
+              {skeletonLoading ? (
+                <DetailsSekeleton />
+              ) : (
+                <div className={styles.row}>
+                  <Description product={product} />
+                </div>
+              )}
               <div className={styles.RelatedWapper}>
                 <ProductRelated />
               </div>
             </div>
           </div>
+
           <Footer />
         </React.Fragment>
       )}
