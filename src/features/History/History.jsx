@@ -4,6 +4,92 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import PulseLoader from 'react-spinners/PulseLoader';
 const History = () => {
+  const listHistory = [
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl',
+      name: 'CryptoPunk',
+      price: '123123',
+      num: '123123',
+    },
+  ];
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -29,36 +115,30 @@ const History = () => {
                   <h3 className="status">Status</h3>
                   <h3 className="total">Time</h3>
                 </div>
-                <div className="cart-items">
-                  <div className="cart-item">
-                    <div className="cart-product">
-                      <img
-                        src="https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl"
-                        alt="anh"
-                      />
-                      <div className="boxName">
-                        <h3 className="itemName">
-                          Laptop HP Pavilion 14-bf016TU (2GE48PA) (14"
-                          FHD/i3-7100U/4GB/1TB HDD/HD 620/Free DOS/1.6 kg)
-                        </h3>
+                {listHistory.map((item) => (
+                  <div className="cart-items">
+                    <div className="cart-item">
+                      <div className="cart-product">
+                        <img src={item.image} alt="anh" />
+                        <div className="boxName">
+                          <h3 className="itemName">{item.name}</h3>
+                        </div>
                       </div>
-                    </div>
-                    <div className="bocprice">
-                      <div className="cart-product-price">123123123123 </div>
-                      <img
-                        src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
-                        alt="anh"
-                        className="item-img"
-                      />
-                    </div>
-                    <div className="cart-product-quantity">
-                      <div className="count">Sell</div>
-                    </div>
-                    <div className="cart-product-total-price">
-                      12212123123 đ
+                      <div className="bocprice">
+                        <div className="cart-product-price">{item.price} </div>
+                        <img
+                          src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
+                          alt="anh"
+                          className="item-img"
+                        />
+                      </div>
+                      <div className="cart-product-quantity">
+                        <div className="count">Sell</div>
+                      </div>
+                      <div className="cart-product-total-price">{item.num}</div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </React.Fragment>
           </div>

@@ -45,7 +45,10 @@ const Header = () => {
           </div>
 
           {acc ? (
-            <div onClick={toggleModal}> Xin chào</div>
+            <div className={styles.id} onClick={toggleModal}>
+              {' '}
+              Xin chào
+            </div>
           ) : (
             <div onClick={toggleAcc}> Connect to Wallet</div>
           )}

@@ -57,14 +57,14 @@
   margin-left: 10px;
   background-color: #fff;
   padding-bottom: 10px;
-  border-radius: 2px;
+  border-radius: 10px;
   /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1); */
   transition: transform linear 0.1s;
   will-change: transform;
   cursor: pointer;
   border: 1px solid rgb(229, 232, 235);
 }
-.home__productitems::before {
+/* .home__productitems::before {
   content: '';
   position: absolute;
   top: 0px;
@@ -141,7 +141,7 @@
     border-bottom-color: #00cc99;
     border-left-color: #00cc99;
   }
-}
+} */
 .home__productitems:hover {
   transform: scale(1.03);
   box-shadow: 0 3px 12px #ccc;

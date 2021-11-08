@@ -1,8 +1,10 @@
 import styles from './ProductInfo.module.css';
 import React from 'react';
 import formatCash from '../../../../constants/formatPrice';
+import { useHistory } from 'react-router';
 import InputQuantity from './components/InputQuantity/InputQuantity';
 function ProductInfo(props) {
+  const history = useHistory();
   const { product } = props;
   const salePrice = (product.sale_price * product.discount) / 100;
   const Price = product.sale_price - salePrice;
@@ -11,7 +13,14 @@ function ProductInfo(props) {
       <div className={styles.infoWrapper}>
         <h4 className={styles.ProductName}>{product?.name}</h4>
         <h5 className={styles.ProductBand}>
-          Owner by <span>{product?.brand?.name}</span>{' '}
+          Owner by{' '}
+          <span
+            onClick={() => {
+              history.push('/userCollection');
+            }}
+          >
+            {product?.brand?.name}
+          </span>{' '}
         </h5>
         <div className={styles.title}>Current Price</div>
         <div className={styles.ProductPriceSale}>

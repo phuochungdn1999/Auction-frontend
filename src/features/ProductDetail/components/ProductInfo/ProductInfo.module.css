@@ -24,6 +24,7 @@
 .ProductBand span {
   color: rgb(32, 129, 226);
   margin-left: 5px;
+  cursor: pointer;
 }
 .ProductPriceWapper {
   /* display: flex;
