@@ -1,22 +1,92 @@
-import React, { useState } from 'react';
-import styles from './Header.module.css';
-import { useHistory } from 'react-router';
-import Search from '../Search/Search';
-import Modal from './components/Modal/Modal';
+import React, { useState, useEffect, useContext } from "react";
+import styles from "./Header.module.css";
+import { useHistory } from "react-router";
+import Search from "../Search/Search";
+import Modal from "./components/Modal/Modal";
+import { injected } from "../Wallet/Connector";
+import { useWeb3React } from "@web3-react/core";
+import AccountContext from "../../Stores/StoreAddress";
+
 const Header = () => {
+  const accountCtx = useContext(AccountContext);
+
   const history = useHistory();
   const [modal, setModal] = useState(false);
-  const [acc, setAcc] = useState(false);
+  const {
+    active,
+    account,
+    library,
+    connector,
+    activate,
+    deactivate,
+    chainId,
+    error,
+  } = useWeb3React();
   const toggleModal = () => {
     setModal(!modal);
   };
-  const toggleAcc = () => {
-    setAcc(!acc);
+
+  const shortenAddress = (address) => {
+    return (
+      address[0] +
+      address[1] +
+      address[2] +
+      address[3] +
+      address[4] +
+      address[5] +
+      address[6] +
+      address[7] +
+      address[8] +
+      "..." +
+      address[34] +
+      address[35] +
+      address[36] +
+      address[37] +
+      address[39] +
+      address[39] +
+      address[40] +
+      address[41]
+    );
   };
+
+  useEffect(async () => {
+    console.log(account);
+    console.log(chainId);
+    if (account !== undefined && (chainId === 4 || chainId === 1)) {
+      const info = {
+        id: String(account),
+        networkId: String(chainId),
+      };
+      console.log(info);
+      const data = await fetch("http://localhost:3001/wallets", {
+        method: "POST",
+        body: JSON.stringify(info),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response = await data.json();
+      console.log(response);
+      accountCtx.addNewAccount(response.data.id);
+      accountCtx.addNewChainId(chainId);
+      accountCtx.addNewToken(response.token);
+      console.log(response.token);
+    }
+  }, [active, account, chainId]);
+
+  async function connect() {
+    try {
+      console.log("123123");
+      await activate(injected);
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
   return (
     <React.Fragment>
       <div className={styles.container}>
-        <div className={styles.titles} onClick={() => history.push('/')}>
+        <div className={styles.titles} onClick={() => history.push("/")}>
           <img
             src="	https://opensea.io/static/images/logos/opensea.svg"
             alt="img"
@@ -27,14 +97,14 @@ const Header = () => {
         <div className={styles.info}>
           <div
             className={styles.acc}
-            onClick={() => history.push('/productList')}
+            onClick={() => history.push("/productList")}
           >
             Explore
           </div>
-          <div className={styles.cart} onClick={() => history.push('/create')}>
+          <div className={styles.cart} onClick={() => history.push("/create")}>
             Create
           </div>
-          <div className={styles.his} onClick={() => history.push('/history')}>
+          <div className={styles.his} onClick={() => history.push("/history")}>
             History
           </div>
           <div className={styles.img}>
@@ -44,13 +114,24 @@ const Header = () => {
             />
           </div>
 
-          {acc ? (
-            <div className={styles.id} onClick={toggleModal}>
-              {' '}
-              Xin chào
+          {!active ? (
+            <div>
+              <button
+                className="btn btn-outline-secondary rounded-pill"
+                onClick={async () => await connect()}
+              >
+                Connect to MetaMask
+              </button>
             </div>
           ) : (
-            <div onClick={toggleAcc}> Connect to Wallet</div>
+            <div>
+              <button
+                onClick={toggleModal}
+                className="btn btn-outline-secondary  rounded-pill  "
+              >
+                {shortenAddress(account)}
+              </button>
+            </div>
           )}
         </div>
       </div>

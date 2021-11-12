@@ -1,10 +1,10 @@
-import React from 'react';
-import styles from './List.module.css';
+import React from "react";
+import styles from "./List.module.css";
 const List = () => {
   return (
     <div className={styles.offer}>
       <div className={styles.name}>
-        <i class="fas fa-list-ul"></i>Offers
+        <i className="fas fa-list-ul"></i>Offers
       </div>
       <div className={styles.titles}>
         <h3 className={styles.price}>Unit Price</h3>
