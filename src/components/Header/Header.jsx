@@ -6,9 +6,11 @@ import Modal from "./components/Modal/Modal";
 import { injected } from "../Wallet/Connector";
 import { useWeb3React } from "@web3-react/core";
 import AccountContext from "../../Stores/StoreAddress";
+import { useMoralis } from "react-moralis";
 
 const Header = () => {
   const accountCtx = useContext(AccountContext);
+  const { authenticate, isAuthenticated, user } = useMoralis();
 
   const history = useHistory();
   const [modal, setModal] = useState(false);
@@ -70,13 +72,23 @@ const Header = () => {
       accountCtx.addNewAccount(response.data.id);
       accountCtx.addNewChainId(chainId);
       accountCtx.addNewToken(response.token);
+      if (chainId === 4) {
+        accountCtx.addNewRpc(
+          "https://speedy-nodes-nyc.moralis.io/8050153ba727567749f63d00/eth/rinkeby"
+        );
+      } else {
+        accountCtx.addNewRpc(
+          "https://speedy-nodes-nyc.moralis.io/8050153ba727567749f63d00/eth/mainnet"
+        );
+      }
       console.log(response.token);
     }
-  }, [active, account, chainId]);
+  }, [active, account, chainId, isAuthenticated]);
 
   async function connect() {
     try {
       console.log("123123");
+      authenticate();
       await activate(injected);
     } catch (ex) {
       console.log(ex);

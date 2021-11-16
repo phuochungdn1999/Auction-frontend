@@ -7,11 +7,16 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { AccountContextProvider } from "./Stores/StoreAddress";
 
 ReactDOM.render(
-  <AccountContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </AccountContextProvider>,
+  <MoralisProvider
+    appId="cAsiJ7iPBhIPTuxfhJWaPJylSo6kgrdQwDLdRWNn"
+    serverUrl="https://a0wlgsrl84ut.usemoralis.com:2053/server"
+  >
+    <AccountContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AccountContextProvider>
+  </MoralisProvider>,
   document.getElementById("root")
 );
 
