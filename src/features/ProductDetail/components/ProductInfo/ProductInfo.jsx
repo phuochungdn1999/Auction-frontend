@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import AccountContext from "../../../../Stores/StoreAddress";
 import axios from "axios";
 const Web3 = require("web3");
-const auctionAbi = require("../.");
+const auctionAbi = require("../../../../abi/auction.json");
 
 function ProductInfo(props) {
   const history = useHistory();
@@ -20,15 +20,44 @@ function ProductInfo(props) {
     setOffer(event.target.value);
   };
   const handleSubmit = async () => {
-    
+    const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
+    const web3 = new Web3(accountCtx.rpc);
+    const makeOfferMethod = contractERC721.methods.makeOffer(auction.auctionId);
+    const makeOfferObj = {
+      // nonce: nonce.toString(),
+      from: account,
+      to: contractAddress,
+      value: web3.utils.toHex(0),
+      data: makeOfferMethod.encodeABI(),
+    };
+    const contractAddress = "0x83CBeFFCE6754988270597f41A6d4bF890B16F9b";
 
+    try {
+      console.log("Open metamask");
+      const txHash = await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [makeOfferMethod],
+      });
+
+      console.log({ txHash });
+
+      let transactionReceipt = null;
+      while (transactionReceipt == null) {
+        // Waiting expectedBlockTime until the transaction is mined
+        transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
+        await sleep(5000);
+      }
+      // contract = transactionReceipt.contractAddress;
+      console.log("Got the transaction receipt: ", transactionReceipt);
+    } catch (error) {
+      console.log("reject", error);
+    }
 
     const obj = {
       walletId: accountCtx.account,
       auctionId: auction.id,
       amount: offer,
     };
-
 
     console.log(obj);
     const headers = {
