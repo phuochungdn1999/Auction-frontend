@@ -1,13 +1,16 @@
-import React from 'react';
-import styles from '../../ProductList.module.css';
-import { Link } from 'react-router-dom';
-import formatCash from '../../../../constants/formatPrice';
+import React, { useState } from "react";
+import styles from "../../ProductList.module.css";
+import { Link } from "react-router-dom";
+import formatCash from "../../../../constants/formatPrice";
 const EachProduct = (props) => {
-  const { product } = props;
+  const { auction } = props;
+  const currentTime = Math.floor(new Date().getTime() / 1000);
+
   return (
     <div className={styles.home__product}>
+      {console.log("each product", auction)}
       <div className={styles.grid__row}>
-        {product.map((item) => (
+        {auction.map((item) => (
           <Link
             to={`/detail/${item.id}`}
             key={item.id}
@@ -17,7 +20,7 @@ const EachProduct = (props) => {
               <div
                 className={styles.home__productitemsimg}
                 style={{
-                  backgroundImage: `url(${item.thumbnail})`,
+                  backgroundImage: `url(${item.imageLogo})`,
                 }}
               ></div>
               <h4 className={styles.home__productitemsname}>{item.name}</h4>
@@ -25,7 +28,7 @@ const EachProduct = (props) => {
               <div className={styles.home__productprice}>
                 <div className={styles.wrapperPrice}>
                   <span className={styles.home__productitemsprice}>
-                    {formatCash(item.sale_price.toString())}
+                    {formatCash(item.highestBid.toString())}
                   </span>
                   <div className={styles.imgWrapper}>
                     <img
@@ -35,7 +38,30 @@ const EachProduct = (props) => {
                     />
                   </div>
                 </div>
-                <div className={styles.status}>Live</div>
+                <div className={styles.status}>
+                  {currentTime >= item.start && currentTime <= item.end ? (
+                    <div
+                      className={styles.status}
+                      class="badge bg-success text-wrap"
+                    >
+                      Live
+                    </div>
+                  ) : currentTime < item.start ? (
+                    <div
+                      className={styles.status}
+                      class="badge bg-warning text-wrap"
+                    >
+                      Upcoming
+                    </div>
+                  ) : (
+                    <div
+                      className={styles.status}
+                      class="badge bg-secondary text-wrap"
+                    >
+                      Closed
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </Link>

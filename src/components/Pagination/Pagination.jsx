@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './Pagination.module.css';
+import React from "react";
+import PropTypes from "prop-types";
+import styles from "./Pagination.module.css";
 const Pagination = ({ pagination, onPageChange }) => {
-  const { page, page_size, total } = pagination;
-  const totalPages = Math.ceil(total / page_size);
+  const { currentPage, limit, total } = pagination;
+  const totalPages = Math.ceil(total / limit);
   function handlePageChange(newPage) {
     if (onPageChange) {
       onPageChange(newPage);
@@ -13,16 +13,16 @@ const Pagination = ({ pagination, onPageChange }) => {
     <div>
       <button
         className={styles.button}
-        disabled={page <= 1}
-        onClick={() => handlePageChange(page - 1)}
+        disabled={currentPage <= 1}
+        onClick={() => handlePageChange(currentPage - 1)}
       >
         <i className="fas fa-angle-left"></i>
       </button>
-      <span>{page}</span>
+      <span>{currentPage}</span>
       <button
         className={styles.button}
-        disabled={page >= totalPages}
-        onClick={() => handlePageChange(page + 1)}
+        disabled={currentPage >= totalPages}
+        onClick={() => handlePageChange(currentPage + 1)}
       >
         <i className="fas fa-angle-right"></i>
       </button>

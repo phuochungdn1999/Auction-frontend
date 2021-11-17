@@ -1,41 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import ProductInfor from './components/ProductInfo/ProductInfo';
-import List from './components/List/List';
-import ProductRelated from './components/ProductRelated/ProductRelated';
-import styles from './ProductDetail.module.css';
-import Header from '../../components/Header/Header';
-import axios from 'axios';
-import { useParams } from 'react-router';
-import Footer from '../../components/Footer/Footer';
-import ClipLoader from 'react-spinners/ClipLoader';
-import Description from './components/Description/Description';
-import DetailsSekeleton from '../../components/ProductSkeleton/DetailsSekeleton';
-import InfoSekeleton from '../../components/ProductSkeleton/InfoSekeleton';
+import React, { useEffect, useState } from "react";
+import ProductInfor from "./components/ProductInfo/ProductInfo";
+import List from "./components/List/List";
+import ProductRelated from "./components/ProductRelated/ProductRelated";
+import styles from "./ProductDetail.module.css";
+import Header from "../../components/Header/Header";
+import axios from "axios";
+import { useParams } from "react-router";
+import Footer from "../../components/Footer/Footer";
+import ClipLoader from "react-spinners/ClipLoader";
+import Description from "./components/Description/Description";
+import DetailsSekeleton from "../../components/ProductSkeleton/DetailsSekeleton";
+import InfoSekeleton from "../../components/ProductSkeleton/InfoSekeleton";
 function ProductDetail(props) {
   const [product, setProduct] = useState({});
+  const [auction, setAuction] = useState({});
+  const [images, setImages] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [skeletonLoading, setSkeletonLoading] = useState(false);
-  useEffect(() => {
+  useEffect(async () => {
     setSkeletonLoading(true);
     if (id) {
-      const getApi = `https://yshuynh.pythonanywhere.com/api/products/${id}`;
-      axios.get(getApi).then((response) => {
-        setTimeout(() => {
-          setProduct(response.data);
-          setSkeletonLoading(false);
-        }, 5000);
-      });
+      const getApi = `http://localhost:3001/auctions/${id}`;
+      console.log("api", getApi);
+      const res = await axios.get(getApi);
+      console.log(res.data);
+      console.log(res.data.data.auction);
+      console.log(res.data.data.image);
+      setAuction(res.data.data.auction);
+      setImages(res.data.data.image);
+      setSkeletonLoading(false);
     }
   }, [id]);
-  useEffect(() => {
-    setLoading(true);
-  }, []);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  // }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1500);
+  // }, []);
   return (
     <React.Fragment>
       {loading ? (
@@ -53,13 +57,14 @@ function ProductDetail(props) {
                   <InfoSekeleton />
                 ) : (
                   <div className={styles.grid__column5}>
+                    {console.log("thum", auction.imageLogo)}
                     <img
-                      src={product?.thumbnail}
+                      src={auction.imageLogo}
                       alt="anhr"
                       className={styles.product_img}
                     />
-                    <div className={styles.listImg}>
-                      {product.images?.slice(0, 5)?.map((item) => (
+                    {/* <div className={styles.listImg}>
+                      {images?.slice(0, 5)?.map((item) => (
                         <img
                           key={item.id}
                           className={styles.imgDetails}
@@ -67,15 +72,15 @@ function ProductDetail(props) {
                           alt="img"
                         />
                       ))}
-                    </div>
+                    </div> */}
                   </div>
                 )}
                 {skeletonLoading ? (
                   <DetailsSekeleton />
                 ) : (
                   <div className={styles.grid__column52}>
-                    <ProductInfor product={product} />
-                    <List />
+                    <ProductInfor auction={auction} />
+                    <List auction={auction}/>
                   </div>
                 )}
               </div>
@@ -83,7 +88,7 @@ function ProductDetail(props) {
                 <DetailsSekeleton />
               ) : (
                 <div className={styles.row}>
-                  <Description product={product} />
+                  <Description auction={auction} />
                 </div>
               )}
               <div className={styles.RelatedWapper}>
