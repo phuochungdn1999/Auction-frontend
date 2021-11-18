@@ -105,7 +105,9 @@ const Header = () => {
           />
           OpenSea
         </div>
+        <div className={styles.search}>
         <Search />
+        </div>
         <div className={styles.info}>
           <div
             className={styles.acc}

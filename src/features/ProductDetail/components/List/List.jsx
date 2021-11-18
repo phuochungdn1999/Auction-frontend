@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./List.module.css";
 import axios from "axios";
+import BigNumber from "bignumber.js";
 
 const List = (props) => {
   const { auction } = props;
@@ -26,7 +27,7 @@ const List = (props) => {
           Address
         </p>
         <p className={styles.time} class="fs-4">
-          Time   
+          Time
         </p>
       </div>
 
@@ -38,7 +39,7 @@ const List = (props) => {
                 src="https://storage.opensea.io/files/accae6b6fb3888cbff27a013729c22dc.svg"
                 alt="WETH"
               />
-              {item.amount} ETH
+              {new BigNumber(item.amount).dividedBy(10 ** 18).toString()} ETH
             </div>
             <div className={styles.count}>
               0x{item.walletId[2]}

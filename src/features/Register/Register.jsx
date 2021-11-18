@@ -11,6 +11,7 @@ import Category from "./components/Category/Category";
 import Importimg from "./components/ImportImg/ImportImg";
 import { useMoralisFile, useMoralis } from "react-moralis";
 import AccountContext from "../../Stores/StoreAddress";
+import BigNumber from "bignumber.js";
 const Web3 = require("web3");
 const auctionAbi = require("../../abi/auction.json");
 
@@ -24,7 +25,7 @@ const Create = () => {
   const [description, setDescription] = useState("");
   const [stepPrice, setStepPrice] = useState("");
   const accountCtx = useContext(AccountContext);
-  const contractAddress = "0x83CBeFFCE6754988270597f41A6d4bF890B16F9b";
+  const contractAddress = "0xEb7073f2cc0D6fa8B3d4bef01467B0dd5Cc2b791";
   const web3 = new Web3(accountCtx.rpc);
   const [from, setFrom] = useState(
     `${new Date().getFullYear()}-${
@@ -166,7 +167,7 @@ const Create = () => {
     const obj = {
       name,
       description,
-      reserveBid: price,
+      reserveBid: new BigNumber(price).multipliedBy(10 ** 18).toString(),
       start: Math.floor(new Date(from).getTime() / 1000),
       end: Math.floor(new Date(to).getTime() / 1000),
       imageLogo,
@@ -187,7 +188,7 @@ const Create = () => {
       body: JSON.stringify(obj),
     });
     const data = await auction.json();
-    console.log(data.data.auction.name);
+    console.log(data);
     const objCard = {
       nameOfCard: data.data.auction.name,
       from: data.data.auction.start,

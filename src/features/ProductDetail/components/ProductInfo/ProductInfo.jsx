@@ -4,6 +4,7 @@ import formatCash from "../../../../constants/formatPrice";
 import { useHistory } from "react-router";
 import AccountContext from "../../../../Stores/StoreAddress";
 import axios from "axios";
+import BigNumber from "bignumber.js";
 const Web3 = require("web3");
 const auctionAbi = require("../../../../abi/auction.json");
 
@@ -13,67 +14,52 @@ function ProductInfo(props) {
 
   const { auction } = props;
   // const salePrice = (product.sale_price * product.discount) / 100;
-  const Price = auction.highestBid;
+  const Price = new BigNumber(auction.highestBid)
+    .dividedBy(10 ** 18)
+    .toString();
 
   const [offer, setOffer] = useState("");
   const handleOfferChange = (event) => {
     setOffer(event.target.value);
   };
+
   const handleSubmit = async () => {
-    const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
     const web3 = new Web3(accountCtx.rpc);
-    const makeOfferMethod = contractERC721.methods.makeOffer(auction.auctionId);
+    const contractAddress = "0xEb7073f2cc0D6fa8B3d4bef01467B0dd5Cc2b791";
+    const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
+    console.log("id", auction.id);
+    const makeOfferMethod = contractERC721.methods
+      .makeOffer(auction.id)
+      .encodeABI();
+    console.log(
+      "number",
+      new BigNumber(offer).multipliedBy(10 ** 18).toString()
+    );
+    console.log("number", auction.id);
     const makeOfferObj = {
       // nonce: nonce.toString(),
-      from: account,
+      from: accountCtx.account,
       to: contractAddress,
-      value: web3.utils.toHex(0),
-      data: makeOfferMethod.encodeABI(),
+      value: web3.utils.toHex(
+        new BigNumber(offer).multipliedBy(10 ** 18).toString()
+      ),
+      data: makeOfferMethod,
     };
-    const contractAddress = "0x83CBeFFCE6754988270597f41A6d4bF890B16F9b";
-
-    try {
-      console.log("Open metamask");
-      const txHash = await window.ethereum.request({
-        method: "eth_sendTransaction",
-        params: [makeOfferMethod],
-      });
-
-      console.log({ txHash });
-
-      let transactionReceipt = null;
-      while (transactionReceipt == null) {
-        // Waiting expectedBlockTime until the transaction is mined
-        transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
-        await sleep(5000);
-      }
-      // contract = transactionReceipt.contractAddress;
-      console.log("Got the transaction receipt: ", transactionReceipt);
-    } catch (error) {
-      console.log("reject", error);
-    }
-
     const obj = {
       walletId: accountCtx.account,
       auctionId: auction.id,
-      amount: offer,
+      amount: new BigNumber(offer).multipliedBy(10 ** 18).toString(),
     };
+    console.log("123123", obj);
 
-    console.log(obj);
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accountCtx.token}`,
-    };
-    const data = await axios.post("http://localhost:3001/offers", obj, {
-      headers: headers,
-    });
-    console.log(data);
+    props.submitOffer(makeOfferObj, obj);
   };
   return (
     <div className={styles.info}>
       <div className={styles.infoWrapper}>
         <h4 className={styles.ProductName}>{auction?.name}</h4>
         <h5 className={styles.ProductBand}>
+          {console.log("auction", auction)}
           Owner by{" "}
           <span
             class="link-info"
@@ -90,7 +76,8 @@ function ProductInfo(props) {
             src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
             alt="eth"
           />
-          <div className={styles.priceItem}>{formatCash(`${Price}`)}</div>
+          {console.log("price", Price)}
+          <div className={styles.priceItem}>{Price}</div>
         </div>
       </div>
       <div className={styles.ProductCartWapper}>
@@ -109,8 +96,15 @@ function ProductInfo(props) {
           {console.log("account", accountCtx.account)}
           {console.log("account", offer.length)}
           {console.log("account", offer.length !== 0)}
+          {console.log()}
+          {console.log(
+            offer.length !== 0 &&
+              parseFloat(offer) >
+                new BigNumber(auction.highestBid).dividedBy(10 ** 18) &&
+              accountCtx.account
+          )}
           {offer.length !== 0 &&
-          parseFloat(offer) > auction.highestBid &&
+          new BigNumber(auction.highestBid).dividedBy(10 ** 18) &&
           accountCtx.account ? (
             <button className={styles.button} onClick={handleSubmit}>
               MAKE OFFER

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ProductInfor from "./components/ProductInfo/ProductInfo";
 import List from "./components/List/List";
 import ProductRelated from "./components/ProductRelated/ProductRelated";
@@ -11,6 +11,12 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Description from "./components/Description/Description";
 import DetailsSekeleton from "../../components/ProductSkeleton/DetailsSekeleton";
 import InfoSekeleton from "../../components/ProductSkeleton/InfoSekeleton";
+import BigNumber from "bignumber.js";
+import AccountContext from "../../Stores/StoreAddress";
+
+const Web3 = require("web3");
+const auctionAbi = require("../../abi/auction.json");
+
 function ProductDetail(props) {
   const [product, setProduct] = useState({});
   const [auction, setAuction] = useState({});
@@ -18,6 +24,9 @@ function ProductDetail(props) {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [skeletonLoading, setSkeletonLoading] = useState(false);
+  const [isReload, setIsReload] = useState(false);
+  const accountCtx = useContext(AccountContext);
+
   useEffect(async () => {
     setSkeletonLoading(true);
     if (id) {
@@ -31,7 +40,7 @@ function ProductDetail(props) {
       setImages(res.data.data.image);
       setSkeletonLoading(false);
     }
-  }, [id]);
+  }, [id, isReload]);
   // useEffect(() => {
   //   setLoading(true);
   // }, []);
@@ -40,6 +49,49 @@ function ProductDetail(props) {
   //     setLoading(false);
   //   }, 1500);
   // }, []);
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
+  const submitOffer = async (makeOfferObj, obj) => {
+    const web3 = new Web3(accountCtx.rpc);
+    const contractAddress = "0xEb7073f2cc0D6fa8B3d4bef01467B0dd5Cc2b791";
+    const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
+    console.log("method", makeOfferObj);
+    console.log("method", obj);
+    try {
+      console.log("Open metamask");
+      const txHash = await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [makeOfferObj],
+      });
+
+      console.log({ txHash });
+
+      let transactionReceipt = null;
+      while (transactionReceipt == null) {
+        // Waiting expectedBlockTime until the transaction is mined
+        transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
+        await sleep(5000);
+      }
+      // contract = transactionReceipt.contractAddress;
+      console.log("Got the transaction receipt: ", transactionReceipt);
+      console.log(obj);
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accountCtx.token}`,
+      };
+      console.log(headers);
+      const data = await axios.post("http://localhost:3001/offers", obj, {
+        headers: headers,
+      });
+      console.log("data", data);
+    } catch (error) {
+      console.log("reject", error);
+    }
+
+    setIsReload(!isReload);
+  };
   return (
     <React.Fragment>
       {loading ? (
@@ -79,8 +131,8 @@ function ProductDetail(props) {
                   <DetailsSekeleton />
                 ) : (
                   <div className={styles.grid__column52}>
-                    <ProductInfor auction={auction} />
-                    <List auction={auction}/>
+                    <ProductInfor auction={auction} submitOffer={submitOffer} />
+                    <List auction={auction} />
                   </div>
                 )}
               </div>
