@@ -60,7 +60,7 @@ const Header = () => {
         networkId: String(chainId),
       };
       console.log(info);
-      const data = await fetch("http://localhost:3001/wallets", {
+      const data = await fetch("http://localhost:3002/wallets", {
         method: "POST",
         body: JSON.stringify(info),
         headers: {
@@ -106,7 +106,7 @@ const Header = () => {
           OpenSea
         </div>
         <div className={styles.search}>
-        <Search />
+          <Search />
         </div>
         <div className={styles.info}>
           <div

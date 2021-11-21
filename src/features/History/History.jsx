@@ -9,22 +9,6 @@ import BigNumber from "bignumber.js";
 import { Link } from "react-router-dom";
 
 const History = () => {
-  const listHistory = [
-    {
-      image:
-        "https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl",
-      name: "CryptoPunk",
-      price: "123123",
-      num: "123123",
-    },
-    {
-      image:
-        "https://lh3.googleusercontent.com/k6LaoZTSi68Atu1eCjTliBR_dCejX--wxPDywbrn7QdVWYHvPIUtZ1-0Ia7qE30RzugvKPPlLUYuv8w_6HFl",
-      name: "CryptoPunk",
-      price: "123123",
-      num: "123123",
-    },
-  ];
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const accountCtx = useContext(AccountContext);
@@ -32,7 +16,7 @@ const History = () => {
   useEffect(async () => {
     setLoading(true);
     if (accountCtx.account) {
-      const getApi = `http://localhost:3001/offers/wallet/${accountCtx.account}`;
+      const getApi = `http://localhost:3002/offers/wallet/${accountCtx.account}`;
       const res = await axios.get(getApi);
       setHistory(res.data.data);
     } else {
@@ -61,7 +45,10 @@ const History = () => {
                 </div>
                 {history.map((item) => (
                   <Link to={`/detail/${item.auctionId}`} key={item.id}>
-                    <div className="cart-items">
+                    <div
+                      className="cart-items"
+                      class="m-5 border border-light rounded-3"
+                    >
                       <div className="cart-item">
                         <div className="cart-product">
                           <img src={item.imageLogo} alt="anh" />

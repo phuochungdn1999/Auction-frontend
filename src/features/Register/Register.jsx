@@ -163,54 +163,56 @@ const Create = () => {
       arr[6] = 1;
     }
     setValidate(arr);
-
-    const obj = {
-      name,
-      description,
-      reserveBid: new BigNumber(price).multipliedBy(10 ** 18).toString(),
-      start: Math.floor(new Date(from).getTime() / 1000),
-      end: Math.floor(new Date(to).getTime() / 1000),
-      imageLogo,
-      images,
-      stepBid: stepPrice ? stepPrice : 0,
-    };
-    console.log(obj);
-    const token = accountCtx.token;
-    const account = accountCtx.account;
-
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    };
-    const auction = await fetch("http://localhost:3001/auctions", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(obj),
-    });
-    const data = await auction.json();
-    console.log(data);
-    const objCard = {
-      nameOfCard: data.data.auction.name,
-      from: data.data.auction.start,
-      to: data.data.auction.end,
-      reserveBid: data.data.auction.reserveBid,
-      stepBid: data.data.auction.stepBid,
-    };
-    const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
-    const dataApprove = contractERC721.methods.addNewCard(
-      account,
-      data.data.auction.id,
-      objCard
-    );
-    const addNewAuctionObj = {
-      // nonce: nonce.toString(),
-      from: account,
-      to: contractAddress,
-      value: web3.utils.toHex(0),
-      data: dataApprove.encodeABI(),
-    };
-
     try {
+      const obj = {
+        name,
+        description,
+        reserveBid: new BigNumber(price).multipliedBy(10 ** 18),
+        start: Math.floor(new Date(from).getTime() / 1000),
+        end: Math.floor(new Date(to).getTime() / 1000),
+        imageLogo,
+        images,
+        stepBid: stepPrice
+          ? new BigNumber(stepPrice).multipliedBy(10 ** 18)
+          : 0,
+      };
+      console.log(obj);
+      const token = accountCtx.token;
+      const account = accountCtx.account;
+
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+      const auction = await fetch("http://localhost:3002/auctions", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(obj),
+      });
+      const data = await auction.json();
+      console.log(data);
+      const objCard = {
+        nameOfCard: data.data.auction.name,
+        from: data.data.auction.start,
+        to: data.data.auction.end,
+        reserveBid: new BigNumber(data.data.auction.reserveBid).toString(),
+        stepBid: new BigNumber(data.data.auction.stepBid).toString(),
+      };
+      console.log("objcard", objCard);
+      const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
+      const dataApprove = contractERC721.methods.addNewCard(
+        account,
+        data.data.auction.id,
+        objCard
+      );
+      const addNewAuctionObj = {
+        // nonce: nonce.toString(),
+        from: account,
+        to: contractAddress,
+        value: web3.utils.toHex(0),
+        data: dataApprove.encodeABI(),
+      };
+
       console.log("Open metamask");
       const txHash = await window.ethereum.request({
         method: "eth_sendTransaction",

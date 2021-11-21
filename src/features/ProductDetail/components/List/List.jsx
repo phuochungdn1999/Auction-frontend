@@ -8,7 +8,7 @@ const List = (props) => {
   const [listOffer, setListOffer] = useState([]);
 
   useEffect(async () => {
-    const getApi = `http://localhost:3001/offers/auction/${auction.id}`;
+    const getApi = `http://localhost:3002/offers/auction/${auction.id}`;
     console.log("list", getApi);
     const data = await axios(getApi);
     console.log("list", data);

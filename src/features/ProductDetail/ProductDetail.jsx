@@ -30,7 +30,7 @@ function ProductDetail(props) {
   useEffect(async () => {
     setSkeletonLoading(true);
     if (id) {
-      const getApi = `http://localhost:3001/auctions/${id}`;
+      const getApi = `http://localhost:3002/auctions/${id}`;
       console.log("api", getApi);
       const res = await axios.get(getApi);
       console.log(res.data);
@@ -82,7 +82,7 @@ function ProductDetail(props) {
         Authorization: `Bearer ${accountCtx.token}`,
       };
       console.log(headers);
-      const data = await axios.post("http://localhost:3001/offers", obj, {
+      const data = await axios.post("http://localhost:3002/offers", obj, {
         headers: headers,
       });
       console.log("data", data);

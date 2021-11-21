@@ -33,7 +33,7 @@ const Productlist = () => {
     window.scrollTo(0, 0);
     const param = queryString.stringify(filters);
     console.log("param", param);
-    const getAuctionAPI = `http://localhost:3001/auctions?${param}`;
+    const getAuctionAPI = `http://localhost:3002/auctions?${param}`;
     setLoadingSekeleton(true);
     try {
       const res = await axios(getAuctionAPI);
