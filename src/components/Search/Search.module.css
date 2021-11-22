@@ -5,6 +5,7 @@
   border-radius: 40px;
   padding: 10px 20px;
   cursor: pointer;
+  position: relative;
 }
 .searchBtn {
   color: #fff;
