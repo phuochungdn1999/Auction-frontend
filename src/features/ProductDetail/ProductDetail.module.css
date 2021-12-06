@@ -256,7 +256,7 @@
   /* border: 1px solid #333; */
 }
 /* reponsive */
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1350px) {
   .grid__column5 {
     width: 49%;
     margin-right: -5px;

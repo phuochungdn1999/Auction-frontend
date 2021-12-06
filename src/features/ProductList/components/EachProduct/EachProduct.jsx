@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../ProductList.module.css";
 import { Link } from "react-router-dom";
 import formatCash from "../../../../constants/formatPrice";
+const  BigNumber = require("bignumber.js");
 const EachProduct = (props) => {
   const { auction } = props;
   const currentTime = Math.floor(new Date().getTime() / 1000);
@@ -28,7 +29,8 @@ const EachProduct = (props) => {
               <div className={styles.home__productprice}>
                 <div className={styles.wrapperPrice}>
                   <span className={styles.home__productitemsprice}>
-                    {formatCash(item.highestBid.toString())}
+                    {/* {formatCash(item.highestBid.toString())} */}
+                    {new BigNumber(item.highestBid).dividedBy(10**18).toString()}
                   </span>
                   <div className={styles.imgWrapper}>
                     <img

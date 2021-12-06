@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Info.module.css';
 import Follow from './Components/Follow';
 const Info = () => {
+  // const { auction } = props;
   return (
     <div className={styles.divWrapper}>
       <div className={styles.Banner}>
@@ -22,7 +23,7 @@ const Info = () => {
           Created by
           <span> DAWCompany</span>
         </div>
-        <Follow />
+        <Follow auction/>
         <div className={styles.Description}>
           Inspired by the award winning television series “The Desperate
           Housewives”, DAW is a collection of 10,000 Desperate ApeWives NFTs.

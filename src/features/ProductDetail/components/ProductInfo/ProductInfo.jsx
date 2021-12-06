@@ -25,7 +25,7 @@ function ProductInfo(props) {
 
   const handleSubmit = async () => {
     const web3 = new Web3(accountCtx.rpc);
-    const contractAddress = "0xEb7073f2cc0D6fa8B3d4bef01467B0dd5Cc2b791";
+    const contractAddress = "0x38BC9d1C2bBC75A857261bc206133B58b7d0Cadb";
     const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
     console.log("id", auction.id);
     const makeOfferMethod = contractERC721.methods
@@ -64,7 +64,7 @@ function ProductInfo(props) {
           <span
             class="link-info"
             onClick={() => {
-              history.push("/userCollection");
+              history.push(`/userCollection/${auction.owner}`);
             }}
           >
             {auction.owner}

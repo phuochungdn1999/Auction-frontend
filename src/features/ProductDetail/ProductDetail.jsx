@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext } from "react";
 import ProductInfor from "./components/ProductInfo/ProductInfo";
 import List from "./components/List/List";

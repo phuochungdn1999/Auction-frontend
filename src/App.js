@@ -19,7 +19,7 @@ function App() {
         <Route path="/productList/" component={Productlist} />
         <Route path="/create/" component={Create} />
         <Route path="/history/" component={History} />
-        <Route path="/userCollection/" component={UserCollection} />
+        <Route path="/userCollection/:id" component={UserCollection} />
         <Route exact path="/detail/:id" component={ProductDetail} />
         <Route path="/" exact component={Main} />
       </Switch>

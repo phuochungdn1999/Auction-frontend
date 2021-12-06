@@ -5,6 +5,7 @@
   border-radius: 40px;
   padding: 10px 20px;
   cursor: pointer;
+  position: relative;
 }
 .searchBtn {
   color: #fff;
@@ -28,5 +29,5 @@
   transition: 0.4s;
   line-height: 30px;
   width: 500px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }

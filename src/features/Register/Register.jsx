@@ -12,6 +12,8 @@ import Importimg from "./components/ImportImg/ImportImg";
 import { useMoralisFile, useMoralis } from "react-moralis";
 import AccountContext from "../../Stores/StoreAddress";
 import BigNumber from "bignumber.js";
+import axios from "axios";
+
 const Web3 = require("web3");
 const auctionAbi = require("../../abi/auction.json");
 
@@ -24,8 +26,10 @@ const Create = () => {
   const [imagesName, setImagesName] = useState("");
   const [description, setDescription] = useState("");
   const [stepPrice, setStepPrice] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   const accountCtx = useContext(AccountContext);
-  const contractAddress = "0xEb7073f2cc0D6fa8B3d4bef01467B0dd5Cc2b791";
+  const contractAddress = "0x38BC9d1C2bBC75A857261bc206133B58b7d0Cadb";
   const web3 = new Web3(accountCtx.rpc);
   const [from, setFrom] = useState(
     `${new Date().getFullYear()}-${
@@ -37,12 +41,24 @@ const Create = () => {
       new Date().getDate() + 1
     }`
   );
-  const [validate, setValidate] = useState([1, 1, 1, 1, 1, 1, 1]);
+  const [validate, setValidate] = useState([1, 1, 1, 1, 1, 1, 1, 1]);
   const { error, isUploading, moralisFile, saveFile } = useMoralisFile();
   const { authenticate, isAuthenticated, user } = useMoralis();
-  useEffect(() => {
-    if (!isAuthenticated) {
-      authenticate();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    try {
+      if (!isAuthenticated) {
+        authenticate();
+      }
+      const getAuctionAPI = `http://localhost:3002/categories`;
+      console.log("getAuctionAPI", getAuctionAPI);
+
+      const res = await axios(getAuctionAPI);
+      console.log(res.data.data.category);
+      setCategories(res.data.data.category);
+    } catch (error) {
+      console.log(error);
+      alert("Xảy ra lỗi");
     }
   }, []);
 
@@ -133,13 +149,33 @@ const Create = () => {
   const handleStepPrice = (event) => {
     setStepPrice(event.target.value);
   };
+  const handleCategory = (event) => {
+    console.log(event.target.value);
+    console.log("categorylist", categoryList);
+    let temp = categoryList;
+    console.log("temp", temp);
+    if (temp.find((item) => item === event.target.value)) {
+      console.log("123");
+      temp = temp.filter((item) => item !== event.target.value);
+    } else {
+      console.log("456");
+      temp.push(event.target.value);
+    }
+    setCategoryList(temp);
+    if (temp.length !== 0) {
+      console.log("99999");
+      const valiteCategory = [...validate];
+      valiteCategory[7] = 1;
+      setValidate(valiteCategory);
+    }
+  };
 
   const sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
   const submitHandler = async () => {
     console.log(new Date(from).getTime() / 1000);
-    let arr = [0, 0, 0, 0, 0, 0, 0];
+    let arr = [0, 0, 0, 0, 0, 0, 0, 0];
     if (imageLogo) {
       arr[0] = 1;
     }
@@ -162,6 +198,9 @@ const Create = () => {
     if (price) {
       arr[6] = 1;
     }
+    if (categoryList.length !== 0) {
+      arr[7] = 1;
+    }
     setValidate(arr);
     try {
       const obj = {
@@ -175,8 +214,9 @@ const Create = () => {
         stepBid: stepPrice
           ? new BigNumber(stepPrice).multipliedBy(10 ** 18)
           : 0,
+        categoryList,
       };
-      console.log(obj);
+      console.log("obj123123", obj);
       const token = accountCtx.token;
       const account = accountCtx.account;
 
@@ -268,7 +308,7 @@ const Create = () => {
                     <span class="pt-2">{logoName}</span>
                   ) : null}
                   {validate[0] === 0 ? (
-                    <span class="pt-2">"This field is require"</span>
+                    <span class="pt-2">This field is require</span>
                   ) : null}
                 </div>
 
@@ -357,12 +397,11 @@ const Create = () => {
                         id="to"
                         onChange={handleChangeTo}
                         value={to}
-                        onChange={handleChangeTo}
                       />
                       <label for="floatingInputGrid">To</label>
                     </div>
                     {validate[5] === 0 ? (
-                      <span class="pt-2">"This field is require"</span>
+                      <span class="pt-2">This field is require</span>
                     ) : null}
                   </div>
                 </div>
@@ -378,7 +417,7 @@ const Create = () => {
                     onChange={handleChangePrice}
                   />
                   {validate[6] === 0 ? (
-                    <span class="pt-2">"This field is require"</span>
+                    <span class="pt-2">This field is require</span>
                   ) : null}
                 </div>
                 <div class="mb-3 mt-2">
@@ -395,10 +434,36 @@ const Create = () => {
                 </div>
                 <div className={styles.name} class="mb-3 mt-2">
                   Category
+                  <div class="form-check">
+                    {console.log("category", categories.length)}
+                    {categories.map((item) => (
+                      <div>
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value={item.id}
+                          id="flexCheckChecked"
+                          onChange={handleCategory}
+                          // checked
+                        />
+                        <label class="form-check-label" for="flexCheckChecked">
+                          {item.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                  {validate[7] === 0 ? (
+                    <span class="pt-2">This field is require</span>
+                  ) : null}
                 </div>
-                <Category />
+
                 <div className={styles.btn}>
-                  <button className={styles.button}>Create</button>
+                  <button
+                    className={styles.button}
+                    class="btn btn-primary btn-lg"
+                  >
+                    Create
+                  </button>
                 </div>
               </ValidatorForm>
             </div>

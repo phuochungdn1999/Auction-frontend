@@ -5,11 +5,10 @@ const Selection1 = () => {
   return (
     <div className={styles.container}>
       <div className={styles.Selection}>
-        <div className={styles.header}>Top User</div>
+        <div className={styles.header}>RECENTLY OFFERS</div>
         <div className={styles.list}>
           <List1 />
-          {/* <List2 />
-          <List3 /> */}
+          
         </div>
       </div>
     </div>
