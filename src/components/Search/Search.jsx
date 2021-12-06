@@ -7,6 +7,73 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Search = ({ onChange }) => {
+  const data =[
+    {
+      id:"1",
+      name:"name"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    {
+      id:"1",
+      name:"name1"
+    },
+    
+  ]
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
   const [items, setItems] = useState("");
@@ -18,10 +85,12 @@ const Search = ({ onChange }) => {
     if (searchWord === "") {
       setFilteredData([]);
     } else {
-      const getApi = `http://localhost:3002/auctions/search/${searchWord}`;
-      const data = await axios(getApi);
-      console.log("data", data.data.data.data.auctions);
-      setFilteredData(data.data.data.data.auctions);
+      // const getApi = `http://localhost:3002/auctions/search/${searchWord}`;
+      // const data = await axios(getApi);
+      // console.log("data", data.data.data.data.auctions);
+      // setFilteredData(data.data.data.data.auctions);
+      setFilteredData(data);
+
     }
   };
 
