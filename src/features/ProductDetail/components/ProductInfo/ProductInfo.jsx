@@ -19,8 +19,13 @@ function ProductInfo(props) {
     .toString();
 
   const [offer, setOffer] = useState("");
+  const [address, setAddress] = useState("");
+  
   const handleOfferChange = (event) => {
     setOffer(event.target.value);
+  };
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
   };
 
   const handleSubmit = async () => {
@@ -48,6 +53,7 @@ function ProductInfo(props) {
     const obj = {
       walletId: accountCtx.account,
       auctionId: auction.id,
+      address: address,
       amount: new BigNumber(offer).multipliedBy(10 ** 18).toString(),
     };
     console.log("123123", obj);
@@ -103,7 +109,7 @@ function ProductInfo(props) {
                 new BigNumber(auction.highestBid).dividedBy(10 ** 18) &&
               accountCtx.account
           )}
-          {offer.length !== 0 &&
+          {offer.length !== 0 && address.length &&
           new BigNumber(auction.highestBid).dividedBy(10 ** 18) &&
           accountCtx.account ? (
             <button className={styles.button} onClick={handleSubmit}>
@@ -115,6 +121,17 @@ function ProductInfo(props) {
             </button>
           )}
         </div>
+        <div className={styles.searchBox1} >
+            {console.log("offer", offer)}
+            <input
+              className={styles.searchTxt}
+              type="text"
+              name="productName_contains"
+              placeholder="Address"
+              autoComplete="off"
+              onChange={handleAddressChange}
+            />
+          </div>
       </div>
     </div>
   );

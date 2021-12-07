@@ -21,6 +21,7 @@ const auctionAbi = require("../../abi/auction.json");
 function ProductDetail(props) {
   const [product, setProduct] = useState({});
   const [auction, setAuction] = useState({});
+  // const [auction, setAuction] = useState({});
   const [images, setImages] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
@@ -31,14 +32,25 @@ function ProductDetail(props) {
   useEffect(async () => {
     setSkeletonLoading(true);
     if (id) {
+      const token = accountCtx.token;
       const getApi = `http://localhost:3002/auctions/${id}`;
       console.log("api", getApi);
       const res = await axios.get(getApi);
-      console.log(res.data);
-      console.log(res.data.data.auction);
-      console.log(res.data.data.image);
+      // console.log(res.data);
+      // console.log(res.data.data.auction);
+      // console.log(res.data.data.image);
       setAuction(res.data.data.auction);
       setImages(res.data.data.image);
+      console.log("token ",token)
+    //   if(token){
+    //   const headers = {
+    //     "Content-Type": "application/json",
+    //     "Authorization": `Bearer ${token}`
+    //   };
+    //   console.log("header",headers)
+    //   const offer = await axios(`http://localhost:3002/offers/wallet/auction/${res.data.data.auction.id}`, headers);
+    //   console.log("offer",offer)
+    // }
       setSkeletonLoading(false);
     }
   }, [id, isReload]);
