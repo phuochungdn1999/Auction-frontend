@@ -19,7 +19,6 @@ const Web3 = require("web3");
 const auctionAbi = require("../../abi/auction.json");
 
 function ProductDetail(props) {
-  const [product, setProduct] = useState({});
   const [auction, setAuction] = useState({});
   // const [auction, setAuction] = useState({});
   const [images, setImages] = useState({});
@@ -27,6 +26,7 @@ function ProductDetail(props) {
   const { id } = useParams();
   const [skeletonLoading, setSkeletonLoading] = useState(false);
   const [isReload, setIsReload] = useState(false);
+  const [userOffer, setUserOffer] = useState({});
   const accountCtx = useContext(AccountContext);
 
   useEffect(async () => {
@@ -41,19 +41,26 @@ function ProductDetail(props) {
       // console.log(res.data.data.image);
       setAuction(res.data.data.auction);
       setImages(res.data.data.image);
-      console.log("token ",token)
-    //   if(token){
-    //   const headers = {
-    //     "Content-Type": "application/json",
-    //     "Authorization": `Bearer ${token}`
-    //   };
-    //   console.log("header",headers)
-    //   const offer = await axios(`http://localhost:3002/offers/wallet/auction/${res.data.data.auction.id}`, headers);
-    //   console.log("offer",offer)
-    // }
+      console.log("token ", token);
+      if (token) {
+        const headers = {
+          Authorization: `Bearer ${accountCtx.token}`,
+        };
+        console.log(headers);
+        const offer = await axios.get(
+          `http://localhost:3002/offers/wallet/auction/${res.data.data.auction.id}`,
+          {
+            headers: headers,
+          }
+        );
+        console.log("offer123123123", offer);
+        // setOffer(offer.)
+        console.log("data", offer.data.data);
+        setUserOffer(offer.data.data);
+      }
       setSkeletonLoading(false);
     }
-  }, [id, isReload]);
+  }, [id, isReload, accountCtx]);
   // useEffect(() => {
   //   setLoading(true);
   // }, []);
@@ -105,6 +112,146 @@ function ProductDetail(props) {
 
     setIsReload(!isReload);
   };
+
+  const submitWinner = async (approveObj, obj) => {
+    const web3 = new Web3(accountCtx.rpc);
+    const contractAddress = "0xEb7073f2cc0D6fa8B3d4bef01467B0dd5Cc2b791";
+    const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
+    console.log("method", approveObj);
+    console.log("method", obj);
+    try {
+      console.log("Open metamask");
+      const txHash = await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [approveObj],
+      });
+
+      console.log({ txHash });
+
+      let transactionReceipt = null;
+      while (transactionReceipt == null) {
+        // Waiting expectedBlockTime until the transaction is mined
+        transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
+        await sleep(5000);
+      }
+      // contract = transactionReceipt.contractAddress;
+      console.log("Got the transaction receipt: ", transactionReceipt);
+      console.log(obj);
+      console.log("apprive winner");
+
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accountCtx.token}`,
+      };
+      const data = await fetch(
+        `http://localhost:3002/auctions/approve/${auction.id}`,
+        {
+          method: "POST",
+          headers: headers,
+          // body: JSON.stringify(obj),
+        }
+      );
+      console.log("data", data);
+    } catch (error) {
+      console.log("reject", error);
+    }
+
+    setIsReload(!isReload);
+  };
+
+  const confirmSend = async (approveObj, obj) => {
+    const web3 = new Web3(accountCtx.rpc);
+    const contractAddress = "0xEb7073f2cc0D6fa8B3d4bef01467B0dd5Cc2b791";
+    const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
+    console.log("method", approveObj);
+    console.log("method", obj);
+    try {
+      console.log("Open metamask");
+      const txHash = await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [approveObj],
+      });
+
+      console.log({ txHash });
+
+      let transactionReceipt = null;
+      while (transactionReceipt == null) {
+        // Waiting expectedBlockTime until the transaction is mined
+        transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
+        await sleep(5000);
+      }
+      // contract = transactionReceipt.contractAddress;
+      console.log("Got the transaction receipt: ", transactionReceipt);
+      console.log(obj);
+      console.log("apprive winner");
+
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accountCtx.token}`,
+      };
+      console.log("receive 1231231231231231231")
+      const data = await fetch(
+        `http://localhost:3002/auctions/send/${auction.id}`,
+        {
+          method: "POST",
+          headers: headers,
+          // body: JSON.stringify(obj),
+        }
+      );
+      console.log("data", data);
+    } catch (error) {
+      console.log("reject", error);
+    }
+
+    setIsReload(!isReload);
+  };
+  const confirmReceive = async (approveObj, obj) => {
+    const web3 = new Web3(accountCtx.rpc);
+    const contractAddress = "0xEb7073f2cc0D6fa8B3d4bef01467B0dd5Cc2b791";
+    const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
+    console.log("method", approveObj);
+    console.log("method", obj);
+    try {
+      console.log("Open metamask");
+      const txHash = await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [approveObj],
+      });
+
+      console.log({ txHash });
+
+      let transactionReceipt = null;
+      while (transactionReceipt == null) {
+        // Waiting expectedBlockTime until the transaction is mined
+        transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
+        await sleep(5000);
+      }
+      // contract = transactionReceipt.contractAddress;
+      console.log("Got the transaction receipt: ", transactionReceipt);
+      console.log(obj);
+      console.log("apprive winner");
+
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accountCtx.token}`,
+      };
+      console.log("receive 4564564")
+      const data = await fetch(
+        `http://localhost:3002/auctions/receive/${auction.id}`,
+        {
+          method: "POST",
+          headers: headers,
+          // body: JSON.stringify(obj),
+        }
+      );
+      console.log("data", data);
+    } catch (error) {
+      console.log("reject", error);
+    }
+
+    setIsReload(!isReload);
+  };
+
   return (
     <React.Fragment>
       {loading ? (
@@ -116,19 +263,20 @@ function ProductDetail(props) {
           <Header />
 
           <div className={styles.container_productDetails}>
-            <div className={styles.grid__row}>
-              <div className={styles.row}>
-                {skeletonLoading ? (
-                  <InfoSekeleton />
-                ) : (
-                  <div className={styles.grid__column5}>
-                    {console.log("thum", auction.imageLogo)}
-                    <img
-                      src={auction.imageLogo}
-                      alt="anhr"
-                      className={styles.product_img}
-                    />
-                    {/* <div className={styles.listImg}>
+            <div class="container-fluid m-5">
+              <div class="m-5">
+                <div class="row">
+                  {skeletonLoading ? (
+                    <InfoSekeleton />
+                  ) : (
+                    <div className={styles.grid__column5} class="col">
+                      {console.log("thum", auction.imageLogo)}
+                      <img
+                        src={auction.imageLogo}
+                        alt="anhr"
+                        className={styles.product_img}
+                      />
+                      {/* <div className={styles.listImg}>
                       {images?.slice(0, 5)?.map((item) => (
                         <img
                           key={item.id}
@@ -138,22 +286,33 @@ function ProductDetail(props) {
                         />
                       ))}
                     </div> */}
-                  </div>
-                )}
-                {skeletonLoading ? (
-                  <DetailsSekeleton />
-                ) : (
-                  <div className={styles.grid__column52}>
-                    <ProductInfor auction={auction} submitOffer={submitOffer} />
-                    <List auction={auction} />
-                  </div>
-                )}
+                    </div>
+                  )}
+                  {skeletonLoading ? (
+                    <DetailsSekeleton />
+                  ) : (
+                    <div className={styles.grid__column52} class="col">
+                      <ProductInfor
+                        auction={auction}
+                        submitOffer={submitOffer}
+                        submitWinner={submitWinner}
+                        confirmReceive={confirmReceive}
+                        confirmSend={confirmSend}
+                        userOffer={userOffer}
+                      />
+                      <List auction={auction} />
+                    </div>
+                  )}
+                </div>
               </div>
               {skeletonLoading ? (
                 <DetailsSekeleton />
               ) : (
-                <div className={styles.row}>
-                  <Description auction={auction} />
+                <div
+                  className={styles.row}
+                  class="m-5 border border-light border-3 rounded-3"
+                >
+                  <Description class="m-5" auction={auction} />
                 </div>
               )}
               <div className={styles.RelatedWapper}>

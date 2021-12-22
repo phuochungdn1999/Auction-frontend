@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './Slider.module.css';
-import { useHistory } from 'react-router';
+import React from "react";
+import styles from "./Slider.module.css";
+import { useHistory } from "react-router";
 const Slider = () => {
   const history = useHistory();
   return (
@@ -9,21 +9,21 @@ const Slider = () => {
         <div className={styles.modal}>
           <div className={styles.infoLeft}>
             <div className={styles.headerName}>
-              Discover, collect, and sell extraordinary NFTs
+              Discover, sell and auction extraordinary Items
             </div>
             <div className={styles.titleName}>
-              on the world's first & largest NFT marketplace
+              on the world's first Blockchain AUCTION marketplace
             </div>
             <div className={styles.button}>
               <button
                 className={styles.btn1}
-                onClick={() => history.push('/productList')}
+                onClick={() => history.push("/productList")}
               >
                 Explore
               </button>
               <button
                 className={styles.btn2}
-                onClick={() => history.push('/create')}
+                onClick={() => history.push("/create")}
               >
                 Create
               </button>

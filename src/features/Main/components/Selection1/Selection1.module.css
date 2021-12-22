@@ -1,6 +1,6 @@
 .Selection {
-  width: 1280px;
-  margin: 50px auto;
+  width: auto;
+  margin: 50px 10% 50px 10%;
   display: flex;
   justify-content: center;
   font-family: 'Poppins', sans-serif;

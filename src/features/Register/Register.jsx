@@ -13,11 +13,13 @@ import { useMoralisFile, useMoralis } from "react-moralis";
 import AccountContext from "../../Stores/StoreAddress";
 import BigNumber from "bignumber.js";
 import axios from "axios";
+import { useHistory } from "react-router";
 
 const Web3 = require("web3");
 const auctionAbi = require("../../abi/auction.json");
 
 const Create = () => {
+  const history = useHistory();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [imageLogo, setImageLogo] = useState(null);
@@ -28,8 +30,10 @@ const Create = () => {
   const [stepPrice, setStepPrice] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const accountCtx = useContext(AccountContext);
-  const contractAddress = "0x38BC9d1C2bBC75A857261bc206133B58b7d0Cadb";
+  const contractAddress = "0xB0b03b0a469f3A60F92C09504AdA25D832D8e06e";
   const web3 = new Web3(accountCtx.rpc);
   const [from, setFrom] = useState(
     `${new Date().getFullYear()}-${
@@ -174,6 +178,8 @@ const Create = () => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
   const submitHandler = async () => {
+    setLoading(true);
+
     console.log(new Date(from).getTime() / 1000);
     let arr = [0, 0, 0, 0, 0, 0, 0, 0];
     if (imageLogo) {
@@ -269,15 +275,19 @@ const Create = () => {
       }
       // contract = transactionReceipt.contractAddress;
       console.log("Got the transaction receipt: ", transactionReceipt);
+      history.push("/productList");
     } catch (error) {
       console.log("reject", error);
     }
+
+    setLoading(false);
   };
 
   return (
     <div className={styles.body1}>
       <Header />
       {console.log(images)}
+      {/* {loading? <h1>loading</h1>:<h2>eubn</h2>} */}
       <div className={styles.body}>
         <Grow in timeout={1500}>
           <div className={styles.col7}>

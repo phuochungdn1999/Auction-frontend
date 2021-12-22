@@ -101,7 +101,7 @@ const Productlist = () => {
         <React.Fragment>
           <Header />
           <div className={styles.container}>
-            <div className={styles.grid} class="container ">
+            <div className={styles.grid} class="container-fluid">
               <div className={styles.grid_row} class="row">
                 <div className={styles.col2} class="col-6 col-md-2">
                   <div
@@ -187,7 +187,7 @@ const Productlist = () => {
                     </div>
                   </div>
                 </div>
-                <div className={styles.grid__column10} class="col-md-10">
+                <div className={styles.grid__column10} class="col-md-10 ">
                   {loadingSekeleton ? (
                     <ProductSkeleton length={12} />
                   ) : (

@@ -53,9 +53,11 @@ const Header = () => {
   };
 
   useEffect(async () => {
+    console.log("899999")
     console.log(account);
     console.log(chainId);
-    if (account !== undefined && (chainId === 4 || chainId === 1)) {
+    if (account !== undefined && (chainId== 4 || chainId == 1  || chainId == 80001)) {
+      console.log("chainId",chainId)
       const info = {
         id: String(account),
         networkId: String(chainId),
@@ -73,6 +75,11 @@ const Header = () => {
       accountCtx.addNewAccount(response.data.id);
       accountCtx.addNewChainId(chainId);
       accountCtx.addNewToken(response.token);
+      if (chainId === 80001) {
+        accountCtx.addNewRpc(
+          "https://speedy-nodes-nyc.moralis.io/8050153ba727567749f63d00/eth/rinkeby"
+        );
+      } 
       if (chainId === 4) {
         accountCtx.addNewRpc(
           "https://speedy-nodes-nyc.moralis.io/8050153ba727567749f63d00/eth/rinkeby"
@@ -89,7 +96,8 @@ const Header = () => {
   async function connect() {
     try {
       console.log("123123");
-      authenticate();
+      // authenticate();
+      console.log(injected)
       await activate(injected);
     } catch (ex) {
       console.log(ex);
@@ -104,7 +112,7 @@ const Header = () => {
             src="	https://opensea.io/static/images/logos/opensea.svg"
             alt="img"
           />
-          OpenSea
+          AUCTIONCHAIN
         </div>
         <div className={styles.search}>
           <Search />
