@@ -113,7 +113,7 @@
 }
 .img {
   height: 52px;
-  line-height: 70px;
+  /* line-height: 70px; */
 }
 .titles {
   display: flex;

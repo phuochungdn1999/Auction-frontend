@@ -8,8 +8,8 @@ import { AccountContextProvider } from "./Stores/StoreAddress";
 
 ReactDOM.render(
   <MoralisProvider
-    appId="cAsiJ7iPBhIPTuxfhJWaPJylSo6kgrdQwDLdRWNn"
-    serverUrl="https://a0wlgsrl84ut.usemoralis.com:2053/server"
+    appId="dnkwy92254yPjvb07n5KJB2BiaeNi3sWM2v8QiSn"
+    serverUrl="https://6fsvg5rdojmt.usemoralis.com:2053/server"
   >
     <AccountContextProvider>
       <BrowserRouter>

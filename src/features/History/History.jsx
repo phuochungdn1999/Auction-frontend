@@ -12,6 +12,26 @@ const History = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const accountCtx = useContext(AccountContext);
+  const currentTime = Math.floor(new Date().getTime() / 1000);
+
+  const handleStatus = (item) => {
+    let status = "";
+    if (currentTime >= item.end || item.endAuction) {
+      status += "END";
+    } else {
+      status += "LIVE";
+    }
+    if (
+      String(item.addressHighest).toLocaleLowerCase() ==
+      String(item.walletId).toLocaleLowerCase()
+    ) {
+      status += "-WINNER";
+    } else {
+      status += "-REFUNDED";
+    }
+
+    return status;
+  };
 
   useEffect(async () => {
     setLoading(true);
@@ -19,6 +39,7 @@ const History = () => {
       const getApi = `http://localhost:3002/offers/wallet/${accountCtx.account}`;
       const res = await axios.get(getApi);
       setHistory(res.data.data);
+      console.log(res.data.data);
     } else {
       setHistory([]);
     }
@@ -69,8 +90,14 @@ const History = () => {
                             className="item-img"
                           />
                         </div>
-                        <div className="cart-product-quantity">
-                          <div className="count">Sell</div>
+                        {/* <div className="cart-product-quantity"> */}
+                        <div>
+                          {handleStatus(item) == "END-WINNER" ||
+                          handleStatus(item) == "END-WINNER" ? (
+                            <div  class="text-success fw-bold">{handleStatus(item)}</div>
+                          ) : (
+                            <div class="text-secondary fw-bold">{handleStatus(item)}</div>
+                          )}
                         </div>
                         <div className="cart-product-total-price">
                           {new Date(item.updatedAt).toDateString()}

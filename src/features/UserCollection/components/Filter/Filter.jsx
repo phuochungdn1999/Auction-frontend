@@ -1,15 +1,15 @@
-import React from 'react';
-import styles from '../../UserCollection.module.css';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import React from "react";
+import styles from "../../UserCollection.module.css";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 const Filter = () => {
   return (
     <div>
       <div className={styles.Filter}>
-        <div className={styles.searchBox}>
+        <div className={styles.searchBox} >
           <input
             className={styles.searchTxt}
             type="text"
@@ -22,9 +22,9 @@ const Filter = () => {
           </div>
         </div>
 
-        <Box className={styles.listItem}>
+        <Box className={styles.listItem} >
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">Order</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"

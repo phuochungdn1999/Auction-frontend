@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import styles from "./UserCollection.module.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -13,6 +13,8 @@ import Pagination from "../../components/Pagination/Pagination";
 import Collection from "./components/Collection/Collection";
 import Info from "./components/Info/Info";
 import Filter from "./components/Filter/Filter";
+import AccountContext from "../../Stores/StoreAddress";
+
 const Productlist = () => {
   const history = useHistory();
   const { id } = useParams();
@@ -23,6 +25,8 @@ const Productlist = () => {
     page_size: 12,
     totalRows: 11,
   });
+  const accountCtx = useContext(AccountContext);
+
   const [filters, setFilters] = useState({
     page_size: 12,
     page: 1,
@@ -32,6 +36,8 @@ const Productlist = () => {
 
   useEffect(async () => {
     window.scrollTo(0, 0);
+    setLoading(true);
+
     const param = queryString.stringify(filters);
     const getAuctionAPI = `http://localhost:3002/auctions/wallet/${id}`;
 
@@ -43,19 +49,12 @@ const Productlist = () => {
       console.log("filterdata", data);
 
       setAuction(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       alert("Xảy ra lỗi");
     }
   }, [id, filters]);
-  useEffect(() => {
-    setLoading(true);
-  }, []);
-  useEffect(() => {
-    return setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, []);
   const handlePageChange = (newPage) => {
     console.log(newPage);
     setFilters({
@@ -78,19 +77,17 @@ const Productlist = () => {
         <React.Fragment>
           <Header />
           <div className={styles.container}>
-            <Info auction={auction}/>
-            <div className={styles.grid}>
-              <Filter />
-              <div className={styles.grid_row}>
-                <div className={styles.grid__column10}>
-                  <Collection auction={auction} />
+            <div class="container-fluid m-5">
+              <Info auction={auction} id={id} />
+              <div className={styles.grid}>
+                <Filter />
+                <div className={styles.grid_row}>
+                  <div className={styles.grid__column10}>
+                    <Collection auction={auction} />
+                  </div>
                 </div>
               </div>
             </div>
-            {/* <Pagination
-              pagination={pagination}
-              onPageChange={handlePageChange}
-            /> */}
           </div>
           <Footer />
         </React.Fragment>

@@ -24,12 +24,12 @@ const Row1 = () => {
     let web3;
     if (chainId === 1) {
       web3 = new Web3(
-        "https://speedy-nodes-nyc.moralis.io/8050153ba727567749f63d00/eth/mainnet"
+        "https://speedy-nodes-nyc.moralis.io/eab63686b28a1d9bdec08dc7/eth/mainnet"
       );
     }
     if (chainId === 4) {
       web3 = new Web3(
-        "https://speedy-nodes-nyc.moralis.io/8050153ba727567749f63d00/eth/rinkeby"
+        "https://speedy-nodes-nyc.moralis.io/eab63686b28a1d9bdec08dc7/eth/rinkeby"
       );
     }
     console.log(account);

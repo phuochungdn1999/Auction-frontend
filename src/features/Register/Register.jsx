@@ -51,8 +51,13 @@ const Create = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     try {
+      window.scrollTo(0, 0);
+      console.log("isAuthenticated", isAuthenticated);
+      console.log("isAuthenticated", user);
       if (!isAuthenticated) {
-        authenticate();
+        await authenticate();
+        console.log("isAuthenticated", isAuthenticated);
+        console.log("isAuthenticated", user);
       }
       const getAuctionAPI = `http://localhost:3002/categories`;
       console.log("getAuctionAPI", getAuctionAPI);
@@ -83,7 +88,8 @@ const Create = () => {
         const result = await saveFile("batman.jpeg", image, {
           saveIPFS: true,
         });
-        console.log(result.ipfs());
+        console.log("result", isAuthenticated);
+        console.log("result", result);
         setImageLogo(result.ipfs());
       };
     }
@@ -113,7 +119,7 @@ const Create = () => {
         saveIPFS: true,
       });
       arr.push(result.ipfs());
-      console.log(result.ipfs());
+      console.log("ipfs", result.ipfs());
       setImages(arr);
       console.log(images);
     };

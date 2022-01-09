@@ -19,7 +19,8 @@ function ProductInfo(props) {
     .toString();
 
   const [offer, setOffer] = useState("");
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(props.userOffer?.address);
+  const [addressOutput, setAddressOutput] = useState(props.userOffer?.address);
   const [isOwner, setIsOwner] = useState(false);
   const currentTime = Math.floor(new Date().getTime() / 1000);
 
@@ -28,6 +29,7 @@ function ProductInfo(props) {
   };
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
+    setAddressOutput(event.target.value);
   };
 
   const validateOwner = () => {
@@ -52,10 +54,14 @@ function ProductInfo(props) {
     return !(auction.endAuction || auction.end < currentTime);
   };
   const validateOwnerSent = () => {
-    return (auction.endAuction || auction.end < currentTime) && auction.onwerApproved;
+    return (
+      (auction.endAuction || auction.end < currentTime) && auction.onwerApproved
+    );
   };
   const validateUserReceive = () => {
-    return (auction.endAuction || auction.end < currentTime) && auction.buyerApprove;
+    return (
+      (auction.endAuction || auction.end < currentTime) && auction.buyerApprove
+    );
   };
 
   const handleSubmit = async () => {
@@ -129,7 +135,6 @@ function ProductInfo(props) {
       data: ownerConfirmMethod,
     };
 
-
     props.confirmSend(makeOfferObj);
   };
 
@@ -201,7 +206,7 @@ function ProductInfo(props) {
               type="button"
               class="btn btn-primary btn-lg"
               onClick={handleConfirmReceive}
-              disabled={validateUserReceive?"true":"false"}
+              disabled={validateUserReceive ? "true" : "false"}
             >
               CONFIRMED RECEIVE PRODUCT
             </button>
@@ -224,12 +229,12 @@ function ProductInfo(props) {
                 </p>
               </h5>
             </div>
-            {console.log("validateOwnerSent",validateOwnerSent())}
+            {console.log("validateOwnerSent", validateOwnerSent())}
             <button
               type="button"
               class="btn btn-primary btn-lg"
               onClick={handleConfirmSend}
-              disabled={validateOwnerSent?"true":"false"}
+              disabled={validateOwnerSent ? "true" : "false"}
             >
               CONFIRMED SENT PRODUCT
             </button>
@@ -326,7 +331,7 @@ function ProductInfo(props) {
               type="text"
               name="productName_contains"
               placeholder={"Address"}
-              value={userOffer ? userOffer.address : null}
+              value={addressOutput}
               autoComplete="off"
               onChange={handleAddressChange}
             />

@@ -1,6 +1,7 @@
-import React from 'react';
-import styles from './Info.module.css';
-import Follow from './Components/Follow';
+import React from "react";
+import styles from "./Info.module.css";
+import Follow from "./Components/Follow";
+import web3 from "web3";
 const Info = (props) => {
   const { auction } = props;
   return (
@@ -18,13 +19,9 @@ const Info = (props) => {
           src="https://lh3.googleusercontent.com/6yDCMzPIcptR38LjsP-QyMvan-6rO8RSy_tHtwzXVpppTEuFXbgxTIjt5TzlP94Ql30bUeStPSrJQx0Ca1xd48K5PCiK3v-CvFLsBg=s130"
           alt="ava"
         />
-        <div className={styles.userName}>Desperate ApeWives</div>
-        <div className={styles.hi}>
-          Created by
-          <span> DAWCompany</span>
-        </div>
-        <Follow auction={auction}/>
-       
+        <div className={styles.userName} class="fs-4 text-secondary mb-3">{web3.utils.toChecksumAddress(props.id)}</div>
+
+        <Follow auction={auction} />
       </div>
     </div>
   );

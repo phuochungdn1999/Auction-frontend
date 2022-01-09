@@ -75,18 +75,13 @@ const Header = () => {
       accountCtx.addNewAccount(response.data.id);
       accountCtx.addNewChainId(chainId);
       accountCtx.addNewToken(response.token);
-      if (chainId === 80001) {
-        accountCtx.addNewRpc(
-          "https://speedy-nodes-nyc.moralis.io/8050153ba727567749f63d00/eth/rinkeby"
-        );
-      } 
       if (chainId === 4) {
         accountCtx.addNewRpc(
-          "https://speedy-nodes-nyc.moralis.io/8050153ba727567749f63d00/eth/rinkeby"
+          "https://speedy-nodes-nyc.moralis.io/eab63686b28a1d9bdec08dc7/eth/rinkeby"
         );
       } else {
         accountCtx.addNewRpc(
-          "https://speedy-nodes-nyc.moralis.io/8050153ba727567749f63d00/eth/mainnet"
+          "https://speedy-nodes-nyc.moralis.io/eab63686b28a1d9bdec08dc7/eth/mainnet"
         );
       }
       console.log(response.token);

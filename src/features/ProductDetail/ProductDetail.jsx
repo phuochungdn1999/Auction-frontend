@@ -29,7 +29,9 @@ function ProductDetail(props) {
   const [userOffer, setUserOffer] = useState({});
   const accountCtx = useContext(AccountContext);
 
+
   useEffect(async () => {
+    window.scrollTo(0, 0);
     setSkeletonLoading(true);
     if (id) {
       const token = accountCtx.token;
@@ -61,14 +63,6 @@ function ProductDetail(props) {
       setSkeletonLoading(false);
     }
   }, [id, isReload, accountCtx]);
-  // useEffect(() => {
-  //   setLoading(true);
-  // }, []);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1500);
-  // }, []);
   const sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
