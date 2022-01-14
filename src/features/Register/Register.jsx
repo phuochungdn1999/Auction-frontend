@@ -85,7 +85,7 @@ const Create = () => {
         console.log("authen", isAuthenticated);
 
         const image = Array.from(Buffer(reader.result));
-        const result = await saveFile("batman.jpeg", image, {
+        const result = await saveFile(`${file.name}`, image, {
           saveIPFS: true,
         });
         console.log("result", isAuthenticated);
@@ -115,7 +115,7 @@ const Create = () => {
       console.log("authen", isAuthenticated);
 
       const image = Array.from(Buffer(reader.result));
-      const result = await saveFile("batman.jpeg", image, {
+      const result = await saveFile(`${file.name}`, image, {
         saveIPFS: true,
       });
       arr.push(result.ipfs());
