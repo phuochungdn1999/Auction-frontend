@@ -1,13 +1,16 @@
-import React from 'react';
-import styles from '../../ProductDetail.module.css';
+import React from "react";
+import styles from "../../ProductDetail.module.css";
 const Description = (props) => {
-  const { product } = props;
+  const { auction } = props;
   return (
     <div className={styles.col7}>
-      <h3 className={styles.headerProductDescription}>Description</h3>
+      <p className={styles.headerProductDescription} class="fs-1">
+        Description
+      </p>
       <div
         className={styles.ProductDescription}
-        dangerouslySetInnerHTML={{ __html: product?.description }}
+        class="d-flex"
+        dangerouslySetInnerHTML={{ __html: auction?.description }}
       ></div>
     </div>
   );

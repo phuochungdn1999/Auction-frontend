@@ -6,7 +6,7 @@ const Selection1 = () => {
   return (
     <div className={styles.container}>
       <div className={styles.Selection}>
-        <div className={styles.header}>TOP AUTICON</div>
+        <div className={styles.header}>TOP AUCTION</div>
         <div className={styles.list}>
           <List1 />
         </div>

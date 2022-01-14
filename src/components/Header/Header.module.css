@@ -11,7 +11,7 @@
   padding: 35px 40px 40px 40px;
   align-items: center;
   height: 40px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -98,7 +98,7 @@
   display: block;
 }
 .notifyList::before {
-  content: '';
+  content: "";
   border-width: 10px;
   border-style: solid;
   border-color: transparent transparent rgb(239, 239, 239) transparent;
@@ -113,7 +113,7 @@
 }
 .img {
   height: 52px;
-  line-height: 70px;
+  /* line-height: 70px; */
 }
 .titles {
   display: flex;
@@ -163,7 +163,7 @@
   border-radius: 3px;
   width: 550px;
   min-width: 300px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   z-index: 10000000;
 }
 .profile {
@@ -178,13 +178,13 @@
 .profile p {
   margin-top: 10px;
   font-size: 20px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   font-weight: 600;
 }
 .token {
   font-size: 16px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   margin-top: 10px;
 }
 .closeModal {
@@ -202,7 +202,7 @@
 
 .offer {
   margin-top: 30px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   border: 1px solid rgb(229, 232, 235);
   width: 100%;
   border-radius: 10px;
@@ -242,6 +242,11 @@
   padding: 20px;
   border-radius: 10px;
   border-top: 1px solid rgb(229, 232, 235);
+}
+.search {
+  flex-direction: column;
+
+  display: flex;
 }
 .name i {
   margin-right: 10px;

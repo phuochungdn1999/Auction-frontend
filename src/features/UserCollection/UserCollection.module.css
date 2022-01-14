@@ -326,7 +326,7 @@
   background-color: #fff;
   background: #fff;
   height: 50px;
-  border-radius: 40px;
+  border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
   width: 50%;
@@ -357,7 +357,7 @@
   font-family: 'Poppins', sans-serif;
 }
 .Filter {
-  width: 80%;
+  width: 100%;
   margin-top: 30px;
   display: flex;
   justify-content: space-evenly;

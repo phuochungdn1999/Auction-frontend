@@ -101,6 +101,17 @@
   color: rgb(32, 129, 226);
 }
 
+.searchBox1 {
+  margin-top: 15px;
+  height: 50px;
+  border: 1px solid rgb(32, 129, 226);
+  border-radius: 10px;
+  padding: 10px 13px;
+  cursor: pointer;
+  width: 65%;
+  color: rgb(32, 129, 226);
+}
+
 .searchTxt {
   border: none;
   background: none;
@@ -116,6 +127,12 @@
 }
 .containBtn {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(251, 253, 255);
+}
+.containBtn1 {
+  display: flexbox;
   flex-direction: row;
   align-items: center;
   background-color: rgb(251, 253, 255);
