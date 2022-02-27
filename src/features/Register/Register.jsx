@@ -14,9 +14,11 @@ import AccountContext from "../../Stores/StoreAddress";
 import BigNumber from "bignumber.js";
 import axios from "axios";
 import { useHistory } from "react-router";
+import { create } from "ipfs-http-client";
 
 const Web3 = require("web3");
 const auctionAbi = require("../../abi/auction.json");
+const client = create("https://ipfs.infura.io:5001/api/v0");
 
 const Create = () => {
   const history = useHistory();
@@ -33,7 +35,7 @@ const Create = () => {
   const [loading, setLoading] = useState(false);
 
   const accountCtx = useContext(AccountContext);
-  const contractAddress = "0xB0b03b0a469f3A60F92C09504AdA25D832D8e06e";
+  const contractAddress = "0xA115D75d277c46da678aD2ECefda0796C58552a4";
   const web3 = new Web3(accountCtx.rpc);
   const [from, setFrom] = useState(
     `${new Date().getFullYear()}-${
@@ -55,7 +57,7 @@ const Create = () => {
       console.log("isAuthenticated", isAuthenticated);
       console.log("isAuthenticated", user);
       if (!isAuthenticated) {
-        await authenticate();
+        // await authenticate();
         console.log("isAuthenticated", isAuthenticated);
         console.log("isAuthenticated", user);
       }
@@ -84,13 +86,17 @@ const Create = () => {
         setValidate(temp);
         console.log("authen", isAuthenticated);
 
-        const image = Array.from(Buffer(reader.result));
-        const result = await saveFile(`${file.name}`, image, {
-          saveIPFS: true,
-        });
-        console.log("result", isAuthenticated);
-        console.log("result", result);
-        setImageLogo(result.ipfs());
+        // let image = Array.from(Buffer(reader.result));
+        let image = Buffer(reader.result);
+        const created = await client.add(image);
+        console.log("created", created);
+        const url = `https://ipfs.infura.io/ipfs/${created.path}`;
+        // const result = await saveFile(`${file.name}`, image, {
+        //   saveIPFS: true,
+        // });
+        // console.log("result", isAuthenticated);
+        // console.log("result", result);
+        setImageLogo(url);
       };
     }
   };
@@ -114,12 +120,17 @@ const Create = () => {
 
       console.log("authen", isAuthenticated);
 
-      const image = Array.from(Buffer(reader.result));
-      const result = await saveFile(`${file.name}`, image, {
-        saveIPFS: true,
-      });
-      arr.push(result.ipfs());
-      console.log("ipfs", result.ipfs());
+      let image = Buffer(reader.result);
+      const created = await client.add(image);
+      console.log("created", created);
+      const url = `https://ipfs.infura.io/ipfs/${created.path}`;
+      // const result = await saveFile(`${file.name}`, image, {
+      //   saveIPFS: true,
+      // });
+      // console.log("result", isAuthenticated);
+      // console.log("result", result);
+      arr.push(url);
+      console.log("ipfs", url);
       setImages(arr);
       console.log(images);
     };
@@ -327,7 +338,32 @@ const Create = () => {
                     <span class="pt-2">This field is require</span>
                   ) : null}
                 </div>
-
+                {/* <div className="upload-img">
+                  <label style={{ marginRight: 10 }}>Avatar:</label>
+                  <div
+                    name="photo"
+                    className="avatar-uploader d-flex  justify-content-center"
+                    style={{
+                      width: 350,
+                      height: 250,
+                      position: "relative",
+                      padding: 4,
+                      cursor: "pointer",
+                      border: "3px dashed rgb(204, 204, 204)",
+                      borderRadius: 10,
+                    }}
+                  >
+                    {/* {urlImg ? ( */}
+                    {/* <img
+                      src={
+                        "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
+                      }
+                      alt="avatar"
+                      width="100%"
+                      height="100%"
+                    />
+                  </div>
+                </div> */} 
                 <div class="mb-5">
                   <label
                     for="formFileMultiple"
@@ -452,17 +488,20 @@ const Create = () => {
                   Category
                   <div class="form-check">
                     {console.log("category", categories.length)}
-                    {categories.map((item) => (
+                    {categories.map((item, idx) => (
                       <div>
                         <input
                           class="form-check-input"
                           type="checkbox"
                           value={item.id}
-                          id="flexCheckChecked"
+                          id={`flexCheckChecked${idx}`}
                           onChange={handleCategory}
                           // checked
                         />
-                        <label class="form-check-label" for="flexCheckChecked">
+                        <label
+                          class="form-check-label"
+                          for={`flexCheckChecked${idx}`}
+                        >
                           {item.name}
                         </label>
                       </div>

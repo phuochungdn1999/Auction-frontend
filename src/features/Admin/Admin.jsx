@@ -266,7 +266,7 @@ const Admin = () => {
                         <th scope="col">ID</th>
                         <th scope="col">AUCTION ID</th>
                         <th scope="col">WALLET</th>
-                        <th scope="col">HIGHEST BID</th>
+                        <th scope="col">VAULE</th>
                         <th scope="col">ADDRESS</th>
                         <th scope="col">UPDATED AT</th>
                       </tr>

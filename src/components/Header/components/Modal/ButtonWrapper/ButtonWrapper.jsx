@@ -32,7 +32,7 @@ const ButtonWrapper = () => {
       </div>
       <div className={styles.disconnect}>
         <i className="fas fa-sign-out-alt" ></i>
-        <Link class="font-weight-normal" to={`/admin`}>ADMIN PAGE</Link>
+        <Link class="font-weight-normal" style={{textDecoration:"none", color:"orangered"}} to={`/admin`}>ADMIN PAGE</Link>
       </div>
     </div>
   );

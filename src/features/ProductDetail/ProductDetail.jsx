@@ -58,7 +58,7 @@ function ProductDetail(props) {
         console.log("offer123123123", offer);
         // setOffer(offer.)
         console.log("data", offer.data.data);
-        setUserOffer(offer.data.data);
+        offer.data.data ? setUserOffer(offer.data.data): setUserOffer(null);
       }
       setSkeletonLoading(false);
     }
@@ -145,7 +145,7 @@ function ProductDetail(props) {
           // body: JSON.stringify(obj),
         }
       );
-      console.log("data", data);
+      console.log("data-------------------------", data);
     } catch (error) {
       console.log("reject", error);
     }

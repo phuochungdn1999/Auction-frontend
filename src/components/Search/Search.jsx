@@ -21,8 +21,9 @@ const Search = ({ onChange }) => {
     } else {
       const getApi = `http://localhost:3002/auctions/search/${searchWord}`;
       const data = await axios(getApi);
-      console.log("data", data.data.data.data.auctions);
-      setFilteredData(data.data.data.data.auctions);
+      console.log("data",data.data.data.auctions)
+      // console.log("data", data.data.data.data.auctions);
+      setFilteredData(data.data.data.auctions);
       // setFilteredData(data);
 
     }
@@ -54,7 +55,7 @@ const Search = ({ onChange }) => {
         <div className="dataResult">
           {filteredData.map((value, key) => {
             return (
-              <Link className="dataItem" key={key} to={`/detail/${value.id}`}>
+              <Link className="dataItem" key={key} to={`/detail/${value.id}`} style={{textDecoration:"none"}}>
                 <p>{value.name} </p>
                 {console.log("key", key)}
               </Link>

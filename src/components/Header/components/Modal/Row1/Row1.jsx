@@ -46,9 +46,9 @@ const Row1 = () => {
   return (
     <div className={styles.offer}>
       <div className={styles.titles}>
-        <h3 className="fs-4">Balance</h3>
-        <h3 className="fs-4">NetWork</h3>
-        <h3 className="fs-4">Wallet</h3>
+        <h3 className="fs-4 fw-bold">Balance</h3>
+        <h3 className="fs-4 fw-bold">NetWork</h3>
+        <h3 className="fs-4 fw-bold">Wallet</h3>
       </div>
       <div className={styles.listItems}>
         <div className={styles.ListItem}>

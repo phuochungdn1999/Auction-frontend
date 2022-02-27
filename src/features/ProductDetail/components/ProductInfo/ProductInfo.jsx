@@ -64,9 +64,13 @@ function ProductInfo(props) {
     );
   };
 
+  const validateAuctionEnd = () => {
+    return auction.buyerApprove && auction.onwerApproved;
+  };
+
   const handleSubmit = async () => {
     const web3 = new Web3(accountCtx.rpc);
-    const contractAddress = "0xB0b03b0a469f3A60F92C09504AdA25D832D8e06e";
+    const contractAddress = "0xA115D75d277c46da678aD2ECefda0796C58552a4";
     const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
     console.log("id", auction.id);
     const makeOfferMethod = contractERC721.methods
@@ -98,7 +102,7 @@ function ProductInfo(props) {
   };
   const handleApprove = async () => {
     const web3 = new Web3(accountCtx.rpc);
-    const contractAddress = "0xB0b03b0a469f3A60F92C09504AdA25D832D8e06e";
+    const contractAddress = "0xA115D75d277c46da678aD2ECefda0796C58552a4";
     const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
     console.log(auction.id);
     const approveMethods = contractERC721.methods
@@ -117,7 +121,7 @@ function ProductInfo(props) {
 
   const handleConfirmSend = async () => {
     const web3 = new Web3(accountCtx.rpc);
-    const contractAddress = "0xB0b03b0a469f3A60F92C09504AdA25D832D8e06e";
+    const contractAddress = "0xA115D75d277c46da678aD2ECefda0796C58552a4";
     const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
     console.log("id", auction.id);
     const ownerConfirmMethod = contractERC721.methods
@@ -140,7 +144,7 @@ function ProductInfo(props) {
 
   const handleConfirmReceive = async () => {
     const web3 = new Web3(accountCtx.rpc);
-    const contractAddress = "0xB0b03b0a469f3A60F92C09504AdA25D832D8e06e";
+    const contractAddress = "0xA115D75d277c46da678aD2ECefda0796C58552a4";
     const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
     console.log(auction.id);
     const approveMethods = contractERC721.methods
@@ -202,14 +206,35 @@ function ProductInfo(props) {
                 </p>
               </h5>
             </div>
-            <button
+            {validateUserReceive() ? (
+              <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                onClick={handleConfirmReceive}
+                disabled={true}
+              >
+                CONFIRMED RECEIVE PRODUCT AND PAY THE AUCTION FEE
+              </button>
+            ) :
+             (validateOwnerSent()?(
+              <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                onClick={handleConfirmReceive}
+                disabled={false}
+              >
+                CONFIRM RECEIVE PRODUCT
+              </button>
+            ):(
+              <button
               type="button"
               class="btn btn-primary btn-lg"
-              onClick={handleConfirmReceive}
-              disabled={validateUserReceive ? "true" : "false"}
-            >
-              CONFIRMED RECEIVE PRODUCT
-            </button>
+              disabled={true}
+              >
+                WAITING FOR OWNER TO SEND PRODUCT
+                {console.log('validateOwnerSent()',validateOwnerSent())}
+              </button>
+            ))}
           </div>
         ) : validateOwner() ? (
           <div className={styles.ProductCartWapper}>
@@ -229,15 +254,43 @@ function ProductInfo(props) {
                 </p>
               </h5>
             </div>
-            {console.log("validateOwnerSent", validateOwnerSent())}
-            <button
-              type="button"
-              class="btn btn-primary btn-lg"
-              onClick={handleConfirmSend}
-              disabled={validateOwnerSent ? "true" : "false"}
-            >
-              CONFIRMED SENT PRODUCT
-            </button>
+            {console.log(
+              "validateOwnerSent",
+              !validateOwnerSent() ? true : false
+            )}
+            {console.log(
+              "validateOwnerSent",
+              validateOwnerSent() ? true : false
+            )}
+            {validateOwnerSent() ? (
+              validateAuctionEnd() ? (
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg"
+                  onClick={handleConfirmSend}
+                  disabled={true}
+                >
+                  BUYER APPROVED AND SENT FEE
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg"
+                  onClick={handleConfirmSend}
+                  disabled={true}
+                >
+                  WAITING FOR BUYER TO RECEIVE 
+                </button>
+              )
+            ) : (
+              <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                onClick={handleConfirmSend}
+              >
+                CONFIRMED SENT PRODUCT
+              </button>
+            )}
           </div>
         ) : (
           <div className={styles.ProductCartWapper}>
@@ -291,7 +344,7 @@ function ProductInfo(props) {
             <button
               type="button"
               class="btn btn-primary btn-lg"
-              disabled="true"
+              disabled={true}
             >
               APPROVE THIS ACCOUNT WIN
             </button>
@@ -311,15 +364,15 @@ function ProductInfo(props) {
                 onChange={handleOfferChange}
               />
             </div>
-            {offer.length !== 0 &&
-            address.length &&
+            {offer?.length !== 0 &&
+            address?.length &&
             new BigNumber(auction.highestBid).dividedBy(10 ** 18) &&
             accountCtx.account ? (
               <button className={styles.button} onClick={handleSubmit}>
                 MAKE OFFER
               </button>
             ) : (
-              <button className={styles.button} disabled="true">
+              <button className={styles.button} disabled={true}>
                 MAKE OFFER
               </button>
             )}

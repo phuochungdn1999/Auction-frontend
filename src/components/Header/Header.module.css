@@ -36,6 +36,11 @@
 .acc {
   cursor: pointer;
 }
+.title{
+  font-size: 18px !important;
+  font-weight: 500 !important;
+
+}
 .searchBox {
   background-color: #2f3640;
   background: #2f3640;
