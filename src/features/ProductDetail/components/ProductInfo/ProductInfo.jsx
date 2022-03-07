@@ -213,7 +213,7 @@ function ProductInfo(props) {
                 onClick={handleConfirmReceive}
                 disabled={true}
               >
-                CONFIRMED RECEIVE PRODUCT AND PAY THE AUCTION FEE
+                CONFIRMED RECEIVE ITEM AND PAY THE AUCTION FEE
               </button>
             ) :
              (validateOwnerSent()?(
@@ -223,7 +223,7 @@ function ProductInfo(props) {
                 onClick={handleConfirmReceive}
                 disabled={false}
               >
-                CONFIRM RECEIVE PRODUCT
+                CONFIRM RECEIVE ITEM
               </button>
             ):(
               <button
@@ -231,7 +231,7 @@ function ProductInfo(props) {
               class="btn btn-primary btn-lg"
               disabled={true}
               >
-                WAITING FOR OWNER TO SEND PRODUCT
+                WAITING FOR OWNER TO SEND ITEM
                 {console.log('validateOwnerSent()',validateOwnerSent())}
               </button>
             ))}
@@ -288,7 +288,7 @@ function ProductInfo(props) {
                 class="btn btn-primary btn-lg"
                 onClick={handleConfirmSend}
               >
-                CONFIRMED SENT PRODUCT
+                CONFIRMED SENT ITEM
               </button>
             )}
           </div>

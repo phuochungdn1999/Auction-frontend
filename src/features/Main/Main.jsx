@@ -9,8 +9,8 @@ const Main = () => {
     <React.Fragment>
       <Header />
       <Slider />
-      <Selection1 />
       <Selection2 />
+      <Selection1 />
       <Footer />
     </React.Fragment>
   );

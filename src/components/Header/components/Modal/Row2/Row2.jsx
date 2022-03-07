@@ -3,7 +3,7 @@ import styles from "./Row2.module.css";
 const Row2 = () => {
   return (
     <div className={styles.offer}>
-      <div className={styles.titles}>
+      {/* <div className={styles.titles}>
         <h3 class="fs-5">Recent Transactions</h3>
         <h3 class="fs-5">Timestamp</h3>
       </div>
@@ -20,7 +20,7 @@ const Row2 = () => {
           <div className={styles.itemPrice}>12.82 ETH</div>
           <div className={styles.time}>Rinkeby</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

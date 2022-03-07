@@ -25,7 +25,7 @@ const Create = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [imageLogo, setImageLogo] = useState(null);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(["`12`12`12123123"]);
   const [logoName, setLogoName] = useState("");
   const [imagesName, setImagesName] = useState("");
   const [description, setDescription] = useState("");
@@ -255,11 +255,13 @@ const Create = () => {
       const data = await auction.json();
       console.log(data);
       const objCard = {
-        nameOfCard: data.data.auction.name,
-        from: data.data.auction.start,
-        to: data.data.auction.end,
-        reserveBid: new BigNumber(data.data.auction.reserveBid).toString(),
-        stepBid: new BigNumber(data.data.auction.stepBid).toString(),
+        nameOfCard: name,
+        from: Math.floor(new Date(from).getTime() / 1000),
+        to: Math.floor(new Date(to).getTime() / 1000),
+        reserveBid: new BigNumber(price).multipliedBy(10 ** 18).toString(),
+        stepBid: new BigNumber(
+          stepPrice ? new BigNumber(stepPrice).multipliedBy(10 ** 18) : 0
+        ).toString(),
       };
       console.log("objcard", objCard);
       const contractERC721 = new web3.eth.Contract(auctionAbi, contractAddress);
@@ -326,45 +328,46 @@ const Create = () => {
                   </label>
                   <input
                     class="form-control form-control-lg"
-                    id="formFileLg"
                     type="file"
                     accept="image/*"
                     onChange={captureImageLogo}
                   />
-                  {imageLogo !== null ? (
-                    <span class="pt-2">{logoName}</span>
-                  ) : null}
+                  <div className="upload-img">
+                    <div
+                      name="photo"
+                      className="avatar-uploader d-flex  justify-content-center"
+                      class="mt-3"
+                      style={{
+                        width: 350,
+                        height: 250,
+                        position: "relative",
+                        padding: 4,
+                        cursor: "pointer",
+                        border: "3px dashed rgb(204, 204, 204)",
+                        borderRadius: 10,
+                      }}
+                    >
+                      {console.log("imageLogo.length == 0", imageLogo != null)}
+
+                      <img
+                        src={
+                          imageLogo == null
+                            ? "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
+                            : imageLogo.toString()
+                          // "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
+                        }
+                        alt="avatar"
+                        width="100%"
+                        height="100%"
+                      />
+                    </div>
+                  </div>
                   {validate[0] === 0 ? (
                     <span class="pt-2">This field is require</span>
                   ) : null}
                 </div>
-                {/* <div className="upload-img">
-                  <label style={{ marginRight: 10 }}>Avatar:</label>
-                  <div
-                    name="photo"
-                    className="avatar-uploader d-flex  justify-content-center"
-                    style={{
-                      width: 350,
-                      height: 250,
-                      position: "relative",
-                      padding: 4,
-                      cursor: "pointer",
-                      border: "3px dashed rgb(204, 204, 204)",
-                      borderRadius: 10,
-                    }}
-                  >
-                    {/* {urlImg ? ( */}
-                    {/* <img
-                      src={
-                        "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
-                      }
-                      alt="avatar"
-                      width="100%"
-                      height="100%"
-                    />
-                  </div>
-                </div> */} 
-                <div class="mb-5">
+
+                {/* <div class="mb-5">
                   <label
                     for="formFileMultiple"
                     class="form-label"
@@ -384,7 +387,7 @@ const Create = () => {
                   {validate[1] === 0 ? (
                     <span class="pt-2">This field is require</span>
                   ) : null}
-                </div>
+                </div>  */}
 
                 <div class="mb-3">
                   <label for="name" class="form-label" className={styles.name}>
@@ -485,11 +488,13 @@ const Create = () => {
                   />
                 </div>
                 <div className={styles.name} class="mb-3 mt-2">
-                  Category
+                <label for="price" class="form-label" className={styles.name}>
+                    Category
+                  </label>
                   <div class="form-check">
                     {console.log("category", categories.length)}
                     {categories.map((item, idx) => (
-                      <div>
+                      <div > 
                         <input
                           class="form-check-input"
                           type="checkbox"

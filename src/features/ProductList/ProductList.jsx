@@ -174,7 +174,7 @@ const Productlist = () => {
                         ))}
                       </div>
                     </div>
-                    <div
+                    {/* <div
                       className={styles.categoryHeading}
                       class="text-primary"
                     >
@@ -184,7 +184,7 @@ const Productlist = () => {
                       <div className={styles.categoryItem}>
                         <div className={styles.categoryItemLink}>Price</div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className={styles.grid__column10} class="col-md-10 ">

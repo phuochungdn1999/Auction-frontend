@@ -10,6 +10,8 @@
   padding: 20px 20px 60px;
   border: 1px solid rgb(229, 232, 235);
   border-radius: 10px;
+  background: ghostwhite;
+
 }
 .header {
   font-size: 25px;
