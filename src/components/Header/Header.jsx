@@ -77,11 +77,11 @@ const Header = () => {
       accountCtx.addNewToken(response.token);
       if (chainId === 4) {
         accountCtx.addNewRpc(
-          "https://speedy-nodes-nyc.moralis.io/eab63686b28a1d9bdec08dc7/eth/rinkeby"
+          "https://rinkeby.infura.io/v3/fffda8246d9241f2aa056b563090838d"
         );
       } else {
         accountCtx.addNewRpc(
-          "https://speedy-nodes-nyc.moralis.io/eab63686b28a1d9bdec08dc7/eth/mainnet"
+          "https://mainnet.infura.io/v3/fffda8246d9241f2aa056b563090838d"
         );
       }
       console.log(response.token);
